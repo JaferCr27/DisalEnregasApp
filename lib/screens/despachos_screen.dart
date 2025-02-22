@@ -74,17 +74,19 @@ class _DespachosScreenState extends State<DespachosScreen> {
         children: _despachos.map((e){
         return 
         Card(
-          child: InkWell(
-            onTap:(){
-              Navigator.push(
-                  context, 
-                  MaterialPageRoute(
-                    builder: (context) => ClientesDespacho(token: widget.token)
-                    )
-                  );
-            },
-            splashColor: Colors.blue.withAlpha(30),
-            child: Container(
+          child: 
+            InkWell(
+              onTap:(){
+                Navigator.push(
+                    context, 
+                    MaterialPageRoute(
+                      builder: (context) => ClientesDespacho(token: widget.token, idDespacho: e.idDespacho)
+                      )
+                    );
+              },
+              splashColor: Colors.blue.withAlpha(30),
+              child: 
+            Container(
               margin: EdgeInsets.all(5),
               //padding: EdgeInsets.all(5),
               child: Column(

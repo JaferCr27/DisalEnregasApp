@@ -3,6 +3,7 @@ import 'package:disal_entregas/components/loader_component.dart';
 import 'package:disal_entregas/models/cliente.dart';
 import 'package:disal_entregas/models/despacho.dart';
 import 'package:disal_entregas/models/despacho_documento.dart';
+import 'package:disal_entregas/models/documento.dart';
 import 'package:disal_entregas/models/response.dart';
 import 'package:disal_entregas/services/data_services.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +20,13 @@ class SincviewScreen extends StatefulWidget {
 }
 
 class _SincviewScreenState extends State<SincviewScreen> {
- 
+  final url = Uri.parse("${Constans.apiUrlTest}/api/Sync/Consultas");
   final _dbHelper = DataServices();
   List<Cliente> clientes = []; 
+  List<DespachoDocumento> despachoDocumentos = []; 
+  List<Documento> documentos = []; 
+  
+  
   String _errorMessage = "";
   bool _showLoader = false;
  
@@ -61,24 +66,11 @@ class _SincviewScreenState extends State<SincviewScreen> {
   }
  
   Future<Response> _getDespachos() async {
-    final url = Uri.parse("${Constans.apiUrlTest}/api/Sync/Consultas");
     final headers = {
       'Authorization': '${widget.token.tokenType} ${widget.token.accessToken}',
       'Content-Type': 'application/json',
     };
     try {
-      // var despachoDocumentoResponse = await http.post(
-      //     url,
-      //     headers: headers,
-      //     body: jsonEncode({'Opcion':'CDD'}),
-      // );
-      // var despachoDocumentoDecode = jsonDecode(despachoDocumentoResponse.body);
-      // if (despachoDocumentoDecode != null) {
-      //   for (var item in despachoDocumentoDecode) {
-      //    // _despachoDocumento.add(DespachoDocumento.fromJson(item));
-      //     _dbHelper.insertDocumento(DespachoDocumento.fromJson(item));
-      //   }
-      // }
       var despachosResponse = await http.post(
           url,
           headers: headers,
@@ -88,7 +80,6 @@ class _SincviewScreenState extends State<SincviewScreen> {
       
       if (despachosDecode != null) {
         for (var item in despachosDecode) {
-          //_despacho.add(Despacho.fromJson(item));
           _dbHelper.insertDespacho(Despacho.fromJson(item));
         }
       } 
@@ -103,8 +94,36 @@ class _SincviewScreenState extends State<SincviewScreen> {
         );
       }
   }
+  Future<Response> _getDespachoDocumento() async {
+    final headers = {
+      'Authorization': '${widget.token.tokenType} ${widget.token.accessToken}',
+      'Content-Type': 'application/json',
+    };
+    try {
+      var despachoDocumentoResponse = await http.post(
+          url,
+          headers: headers,
+          body: jsonEncode({'Opcion':'CDD'}),
+      );
+      var despachoDocumentoDecode = jsonDecode(despachoDocumentoResponse.body);
+      if (despachoDocumentoDecode != null) {
+        for (var despachoDoc in despachoDocumentoDecode) {
+          despachoDocumentos.add(DespachoDocumento.fromJson(despachoDoc));
+        }
+        _dbHelper.insertDespachoDocs(despachoDocumentos);
+      }
+      return Response(
+        isSuccess: true, 
+        message: 'Se sincronizó con exito los despachos docs'
+      );
+    } catch (e) {
+        return Response(
+          isSuccess: false, 
+          message: e.toString()
+        );
+      }
+  }
   Future<Response> _getClientes() async {
-    final url = Uri.parse("${Constans.apiUrlTest}/api/Sync/Consultas");
     final headers = {
       'Authorization': '${widget.token.tokenType} ${widget.token.accessToken}',
       'Content-Type': 'application/json',
@@ -120,8 +139,8 @@ class _SincviewScreenState extends State<SincviewScreen> {
         for (var cliente in clientesJson) {
           clientes.add(Cliente.fromJson(cliente));
         }
-          _dbHelper.insertarClientes(clientes);
-        }
+        _dbHelper.insertarClientes(clientes);
+      }
       return Response(
         isSuccess: true, 
         message: 'Se sincronizó con exito los clientes'
@@ -130,13 +149,35 @@ class _SincviewScreenState extends State<SincviewScreen> {
           return Response(isSuccess: false, message: e.toString());
       }
   }
-
+  Future<Response> _getDocumentos() async{
+    final headers = {
+      'Authorization': '${widget.token.tokenType} ${widget.token.accessToken}',
+      'Content-Type': 'application/json',
+    };
+    try {
+      var documentoResponse = await http.post(
+            url,
+            headers: headers,
+            body: jsonEncode({'Opcion':'CD'}),
+        );
+      var documentoJson = jsonDecode(documentoResponse.body);
+      if (documentoJson != null) {
+        for (var documento in documentoJson) {
+          documentos.add(Documento.fromJson(documento));
+        }
+        _dbHelper.insertarDocumentos(documentos);
+      }
+      return Response(isSuccess: true, message: 'Se sincronizó con exito los clientes');
+      } catch (e) {
+          return Response(isSuccess: false, message: e.toString());
+      }
+  }
   void _sincronizarInicio() async {
+    await _dbHelper.deleteAll();
     setState(() {
       _showLoader = true;
-      _errorMessage = "...Sincronizando despachos...";
+      _errorMessage = "...Sincronizando Despachos...";
       });
-    await _dbHelper.deleteAll();
     var despachos = await _getDespachos();
     if (!despachos.isSuccess) {
       setState(() {
@@ -145,14 +186,28 @@ class _SincviewScreenState extends State<SincviewScreen> {
       });
       return;
     }
-    setState(() {
-      _errorMessage = "...Sincronizando clientes...";
-    });
+    var despachoDocs = await _getDespachoDocumento();
+    if (!despachoDocs.isSuccess) {
+       setState(() {
+      _showLoader = false;
+      _errorMessage = despachoDocs.message;
+      });
+    }
+    setState((){_errorMessage = "...Sincronizando Clientes...";});
     var clientes = await _getClientes();
     if (!clientes.isSuccess) {
       setState(() {
       _showLoader = false;
-      _errorMessage = despachos.message;
+      _errorMessage = clientes.message;
+      });
+      return;
+    }
+    setState((){_errorMessage = "...Sincronizando Documentos...";});
+    var documentos = await _getDocumentos();
+    if (!documentos.isSuccess) {
+      setState(() {
+      _showLoader = false;
+      _errorMessage = clientes.message;
       });
       return;
     }

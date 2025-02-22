@@ -44,7 +44,10 @@ class Cliente {
     this.diasCredito,
     this.vendedor
   });
+  String get condicionPagoDesc => condicionPago =="0" ? "Contado" : "Crédito";
 
+
+  
   Cliente.fromJson(Map<String, dynamic> json) {
     cliente = json['Cliente'];
     nombre = json['Nombre'];

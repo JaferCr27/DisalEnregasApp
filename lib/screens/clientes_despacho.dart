@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 
 class ClientesDespacho extends StatefulWidget {
   final Token token;
+  final int idDespacho;
 
-  const ClientesDespacho({super.key, required this.token});
+  const ClientesDespacho({super.key, required this.token, required this.idDespacho});
   @override
   State<ClientesDespacho> createState() => _ClientesDespachoState();
 }
@@ -29,9 +30,10 @@ class _ClientesDespachoState extends State<ClientesDespacho> {
       appBar: AppBar(
         title: Text("Clientes"),
       ),
-      body: Center(
-        child: _showLoader ? LoaderComponent(text: '...Cargando...'): getContent(),
-      ),
+      body: _showLoader ? LoaderComponent(text: '...Cargando...'): getContent()
+      // Center(
+      //   child: ,
+      // ),
     );
   }
   Widget _noContent() {
@@ -52,30 +54,64 @@ class _ClientesDespachoState extends State<ClientesDespacho> {
     : _getListView();
   }  
   Widget _getListView() {
-    return ListView(
-      children: _clientes.map((e){
-        return Column(
-          children: [
-            ListTile(
-              leading: Icon(Icons.storefront),
-              title: Text('(${e.cliente}) - ${e.nombre}',style: TextStyle( fontWeight: FontWeight.bold),),
-              subtitle: Text(e.direccion.toString()),
-              trailing: Icon(Icons.keyboard_double_arrow_right),
-              isThreeLine: true,
-              dense: true,
-            ),
-            Divider(
-              height: 20,
-            )
-          ],
-        );
-      }).toList(),
-    );
+    return 
+      Container(
+        margin: EdgeInsets.all(5),
+        child:
+          ListView.builder(
+            primary: false,
+            itemCount: _clientes.length,
+            itemBuilder: (context, index) => buildCard(_clientes[index]),
+          )
+      );
   }
 
   Future<void> _getClientes() async {
     setState(() => _showLoader = true);
-    _clientes = await _dbHelper.getClientes();
+    _clientes = await _dbHelper.getClientesDespacho(widget.idDespacho);
     setState(() => _showLoader = false);
+  }
+  
+  Widget buildCard(Cliente client) {
+    return 
+      Card(
+        child: 
+          InkWell(
+            onTap: () {
+          
+            },
+            splashColor: Colors.blue.withAlpha(30),
+            child: 
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.storefront, color: Colors.green[900],),
+                    title: Text('(${client.cliente}) - ${client.alias}',style: TextStyle( fontWeight: FontWeight.bold),),
+                    subtitle: Text(client.direccion.toString().trim()),
+                    trailing: Text(client.secuencia.toString(),style: TextStyle( color: Colors.deepPurpleAccent,fontWeight: FontWeight.bold,fontSize: 14)),
+                    isThreeLine: true,
+                    dense: true,
+                  ),
+                  Row(
+                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(width: 55,),
+                      Text(client.ventanaAtencion1.toString()),
+                      Text(" - "),
+                      Text(client.ventanaAtencion1.toString(),)
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: 55,),
+                      Text(client.condicionPagoDesc.toString(),)
+                    ],
+                  ),
+                  Text(client.horaLlegada.toString(),style: TextStyle( color: Colors.deepOrange, fontWeight: FontWeight.bold)),
+                ],
+              ),
+          ),
+      );
   }
 }

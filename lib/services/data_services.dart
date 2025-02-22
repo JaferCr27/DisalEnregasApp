@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:disal_entregas/models/cliente.dart';
 import 'package:disal_entregas/models/despacho.dart';
 import 'package:disal_entregas/models/despacho_documento.dart';
+import 'package:disal_entregas/models/documento.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -36,8 +37,8 @@ static Future<void> _createTables(Database db) async {
               IdDespacho integer,
               IdDocumento integer,
               Estado varchar
-          )          
-          ''',
+          )       
+          '''
     );
     db.execute(
           '''
@@ -60,7 +61,7 @@ static Future<void> _createTables(Database db) async {
               Bodega varchar , 
               Observacion varchar 
           )       
-          ''',
+          '''
       );
     db.execute(
           '''
@@ -87,10 +88,44 @@ static Future<void> _createTables(Database db) async {
             DiasCredito integer , 
             Vendedor varchar 
           )
-          ''',
-
+          '''
+      );
+    db.execute(
+      '''
+          CREATE TABLE DocumentoModel (
+              IdDocumento integer,
+              Documento varchar,
+              FechaDocumento varchar,
+              FechaEntrega varchar,
+              Cliente varchar,
+              TotalDocumento float,
+              Impuesto float,
+              Descuento float,
+              DescuentoVolumen float,
+              Moneda varchar,
+              OrdenCompra varchar,
+              Pedido varchar,
+              TipoDocumento varchar,
+              NivelPrecio varchar,
+              Version integer,
+              CondicionPago integer,
+              Ruta varchar,
+              Condicionada integer,
+              Bodega varchar,
+              Estado varchar,
+              IdRechazo integer,
+              Naturaleza varchar,
+              IdMotivo integer,
+              EstadoERP varchar,
+              IdRecurso integer,
+              EntregaNula integer,
+              IdDespacho integer,
+              Marchamo varchar
+          )       
+          '''
+    );
 /**
- * Estos campos no se si se usan en la DB
+ * Estos campos no se si se usan en la tabla cliente
  * ItemCount integer , 
             CantidadDocumentos integer , 
             IdDespacho integer , 
@@ -121,8 +156,6 @@ static Future<void> _createTables(Database db) async {
             BackgroundColor varchar 
  * 
  */
-          
-      );
   }
   // Método para cerrar la base de datos
   Future<void> closeDB() async {
@@ -135,49 +168,39 @@ static Future<void> _createTables(Database db) async {
     await db.delete('DespachoDocumento'); 
     await db.delete('Despacho'); 
     await db.delete('ClienteModel'); 
+    await db.delete('DocumentoModel'); 
   }
-
-  // Método para eliminar la base de datos
-  // Future<void> deleteDB() async {
-  //   final path = await getDatabasesPath();
-  //   final dbPath = join(path, 'DisalEtregas.db');
-  //   await deleteDatabase(dbPath);
-  // }
-
-  // Future<void> dropAllTables() async {
-  //   final db = await getDatabase();
-  //   await db.execute(DROP TABLE IF EXISTS DespachoDocumento);
-  //   await db.execute(DROP TABLE IF EXISTS Despacho);
-  // }
-
 
   // Inserts
-  Future<int> insertDocumento(DespachoDocumento documento) async {
-    final db = await getDatabase();
-    return await db.insert('DespachoDocumento', documento.toJson());
-  }
-
-  Future<int> insertCliente(Cliente cliente) async {
-    final db = await getDatabase();
-    return await db.insert('ClienteModel', cliente.toJson());
-  }
-
+  // `noResult: true` mejora el rendimiento
   Future<void> insertarClientes(List<Cliente> clientes) async {
     final db = await getDatabase();
     final batch = db.batch();
     for (var cliente in clientes) {
       batch.insert('ClienteModel', cliente.toJson());
     }
-    await batch.commit(noResult: true); // `noResult: true` mejora el rendimiento
+    await batch.commit(noResult: true); 
   }
-
-
-
-  Future<int> insertDespacho(Despacho despacho) async {
+  Future<void> insertDespachoDocs(List<DespachoDocumento> despachoDocumentos) async {
     final db = await getDatabase();
-    return await db.insert('Despacho', despacho.toJson());  
+    final batch = db.batch();
+    for (var despachoDocs in despachoDocumentos) {
+      batch.insert('DespachoDocumento', despachoDocs.toJson());
+    }
+    await batch.commit(noResult: true);
   }
-  // Obtener todos los documentos
+  Future<void> insertarDocumentos(List<Documento> documentos) async {
+    final db = await getDatabase();
+    final batch = db.batch();
+    for (var despachoDocs in documentos) {
+      batch.insert('DocumentoModel', despachoDocs.toJson());
+    }
+    await batch.commit(noResult: true);
+  }  
+
+
+
+  // Selects 
   Future<List<DespachoDocumento>> getAllDespachoDocumento() async {
     final db = await getDatabase();
     final List<Map<String, dynamic>> maps = await db.query('DespachoDocumento');
@@ -200,5 +223,58 @@ static Future<void> _createTables(Database db) async {
       return Cliente.fromJson(maps[i]);
     });
   }
-  
+
+  Future<List<Cliente>> getClientesDespacho(int idDespacho) async {
+    final db = await getDatabase();
+    final List<Map<String, dynamic>> clientes = await db.rawQuery(
+      '''
+        SELECT c.Cliente, c.Nombre, c.Alias,c.Direccion,c.VentanaAtencion1,c.VentanaAtencion2,c.Vendedor,c.HoraLlegada,c.Secuencia,
+        c.CondicionPago
+        FROM Despacho d 
+        INNER JOIN DespachoDocumento dd ON d.IdDespacho = dd.IdDespacho
+        INNER JOIN DocumentoModel doc ON dd.IdDocumento = doc.IdDocumento
+        INNER JOIN ClienteModel c on doc.Cliente = c.Cliente
+        WHERE d.IdDespacho = ?  
+        group by c.Cliente,c.Nombre, c.Alias,c.Direccion,c.VentanaAtencion1,c.VentanaAtencion2,c.Vendedor,c.HoraLlegada,c.Secuencia,
+        c.CondicionPago
+      ''', [idDespacho]); 
+    
+    return clientes.map((map) {
+      return Cliente(
+        cliente: map['Cliente'],
+        nombre: map['Nombre'],
+        alias: map['Alias'],
+        direccion: map['Direccion'],
+        ventanaAtencion1: map['VentanaAtencion1'],
+        ventanaAtencion2: map['VentanaAtencion2'],
+        vendedor: map['Vendedor'],
+        horaLlegada: map['HoraLlegada'],
+        secuencia: map['Secuencia'],
+        condicionPago: map['CondicionPago'],
+      );
+    }).toList();
+  }
+
+
+
+  Future<int> insertDespacho(Despacho despacho) async {
+    final db = await getDatabase();
+    return await db.insert('Despacho', despacho.toJson());  
+  }
+
 }
+
+
+
+  // Método para eliminar la base de datos
+  // Future<void> deleteDB() async {
+  //   final path = await getDatabasesPath();
+  //   final dbPath = join(path, 'DisalEtregas.db');
+  //   await deleteDatabase(dbPath);
+  // }
+
+  // Future<void> dropAllTables() async {
+  //   final db = await getDatabase();
+  //   await db.execute(DROP TABLE IF EXISTS DespachoDocumento);
+  //   await db.execute(DROP TABLE IF EXISTS Despacho);
+  // }
