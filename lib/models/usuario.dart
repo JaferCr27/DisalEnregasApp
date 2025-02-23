@@ -1,18 +1,16 @@
 class Usuario {
   final String userName;
   final String password;
-  final String nombreChofer;
   final String chofer;
-  final String empresa;
-  final bool isRemenber;
+  final String nombreChofer;
   final int idRecurso;
+  final bool isRemenber;
 
    Usuario({
     required this.userName,
     required this.password,
     required this.nombreChofer,
     required this.chofer,
-    required this.empresa,
     required this.isRemenber,
     required this.idRecurso,
   });
@@ -23,7 +21,6 @@ class Usuario {
       password: json['Password'] ?? '',
       nombreChofer: json['NombreChofer'] ?? '',
       chofer: json['Chofer'] ?? '',
-      empresa: json['Empresa'] ?? '',
       isRemenber: json['IsRemenber'] ?? false,
       idRecurso: json['IdRecurso'] ?? 0,
     );

@@ -30,7 +30,7 @@ class _DespachosScreenState extends State<DespachosScreen> {
         return Scaffold(
       appBar: AppBar(
         title: Text('Disal Entregas',style: TextStyle(fontSize: 15),),
-        actions: <Widget>[
+        actions: [
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 16.0),
               child: IconButton(
@@ -70,66 +70,69 @@ class _DespachosScreenState extends State<DespachosScreen> {
 
   Widget _getListView() {
     return 
-      ListView(
-        children: _despachos.map((e){
-        return 
-        Card(
-          child: 
-            InkWell(
-              onTap:(){
-                Navigator.push(
-                    context, 
-                    MaterialPageRoute(
-                      builder: (context) => ClientesDespacho(token: widget.token, idDespacho: e.idDespacho)
-                      )
-                    );
-              },
-              splashColor: Colors.blue.withAlpha(30),
-              child: 
-            Container(
-              margin: EdgeInsets.all(5),
-              //padding: EdgeInsets.all(5),
-              child: Column(
-                children: [
-                   ListTile(
-                        //leading: Icon(Icons.warning_amber_rounded,color: Colors.orangeAccent,size: 25,),
-                        title:  
-                         Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                    Text(e.consecutivo,style:
-                                    TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold
-                                    ),
-                                    ),
-                                    Chip(
-                                      avatar: CircleAvatar(
-                                        backgroundColor: Colors.red,
-                                        //child: const Text('AB'),
+      RefreshIndicator(
+        onRefresh: () => _getDespachos(),
+        child: 
+        ListView(
+          children: _despachos.map((e){
+          return 
+          Card(
+            child: 
+              InkWell(
+                onTap:(){
+                  Navigator.push(
+                      context, 
+                      MaterialPageRoute(
+                        builder: (context) => ClientesDespacho(token: widget.token, despacho: e)
+                        )
+                      );
+                },
+                splashColor: Colors.blue.withAlpha(30),
+                child: 
+              Container(
+                margin: EdgeInsets.all(1),
+                child: Column(
+                  children: [
+                     ListTile(
+                          //leading: Icon(Icons.warning_amber_rounded,color: Colors.orangeAccent,size: 25,),
+                          title:  
+                           Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                      Text(e.consecutivo,style:
+                                      TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold
                                       ),
-                                      label: Text("Pendiente"),
-                                    )
-                                ],
-                              ),
-                            ],
-                          ),
-                        subtitle: Text('Fecha: ${e.fechaEntrega}',),
-                    ),
-                    ListTile(
-                      subtitle: Text('Pendientes: 10 Finalizados: 1',),
-                      trailing: Icon(Icons.keyboard_double_arrow_right),
-                      dense: true,
-
-                    )
-                ],
-              ),
-            ) ,
-          ),
-        );
-      }).toList(),
-    );
+                                      ),
+                                      Chip(
+                                        avatar: CircleAvatar(
+                                          backgroundColor: Colors.red,
+                                          //child: const Text('AB'),
+                                        ),
+                                        label: Text("Pendiente"),
+                                      )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          subtitle: Text('Fecha: ${e.fechaEntrega}',),
+                      ),
+                      ListTile(
+                        subtitle: Text('Pendientes: 10 Finalizados: 1',),
+                        trailing: Icon(Icons.keyboard_double_arrow_right),
+                        dense: true,
+        
+                      )
+                  ],
+                ),
+              ) ,
+            ),
+          );
+        }).toList(),
+            ),
+      );
   }
 }

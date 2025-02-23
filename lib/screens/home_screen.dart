@@ -3,6 +3,7 @@ import 'package:disal_entregas/models/usuario.dart';
 import 'package:disal_entregas/screens/despachos_screen.dart';
 import 'package:disal_entregas/screens/login_screen.dart';
 import 'package:disal_entregas/screens/sincView_screen.dart';
+import 'package:disal_entregas/screens/user_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,10 +20,24 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Disal Entregas',style: TextStyle(fontSize: 15),),
-        actions: const <Widget>[
+        actions: 
+          [
             Padding(
               padding: EdgeInsetsDirectional.only(end: 16.0),
-              child: CircleAvatar(child: Icon(Icons.account_circle)),
+              child: CircleAvatar(
+                child: 
+                  InkWell(
+                    onTap:() {
+                       Navigator.push(
+                        context, 
+                        MaterialPageRoute(
+                          builder: (context) => UserScreen(usuario: widget.usuario)
+                          )
+                        );
+                    },
+                    child: Icon(Icons.account_circle),
+                  ) 
+                )
             ),
           ],
         ),

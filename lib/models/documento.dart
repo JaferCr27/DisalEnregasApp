@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Documento {
   int? idDocumento;
   String? documento;
@@ -58,6 +60,28 @@ class Documento {
       this.idDespacho,
       this.marchamo
     });
+
+    String get estadoDesc {
+      if (estado == "PEND") {
+        return "Pendiente";
+      }
+      return "";
+    }
+    String get tipoDocDesc {
+      const Map<String, String> tipos = {
+        "FACT": "Factura",
+        "CAMV": "Cambios Vendedor",
+      };
+      return tipos[tipoDocumento ?? ""] ?? "";
+    }
+     Icon get IconDoc {
+      if (tipoDocumento == "FACT") {
+        return Icon(Icons.receipt_long, color: Colors.green[900],);
+      }
+      return Icon(Icons.inventory_2, color: Colors.orange,);
+    }
+
+
 
     factory Documento.fromJson(Map<String, dynamic> json){
       return Documento(

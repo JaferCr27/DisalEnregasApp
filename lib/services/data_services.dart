@@ -262,6 +262,38 @@ static Future<void> _createTables(Database db) async {
     return await db.insert('Despacho', despacho.toJson());  
   }
 
+  Future<List<Documento>> getDocumentosClienteDespacho(String cliente, int idDespacho) async {
+    final db = await getDatabase();
+    final List<Map<String, dynamic>> documentos = await db.rawQuery(
+      '''
+        SELECT doc.Documento,
+               doc.TipoDocumento,
+               doc.TotalDocumento, 
+               doc.FechaEntrega,
+               doc.Estado,
+               doc.Ruta,
+               doc.Marchamo, 
+               doc.CondicionPago,
+               doc.CondicionPago
+        FROM Despacho d 
+        INNER JOIN DespachoDocumento dd ON d.IdDespacho = dd.IdDespacho
+        INNER JOIN DocumentoModel doc ON dd.IdDocumento = doc.IdDocumento
+        WHERE d.IdDespacho = ? and doc.Cliente = ?  
+      ''', [idDespacho, cliente]); 
+      return documentos.map((map) {
+      return Documento(
+        documento: map['Documento'],
+        tipoDocumento: map['TipoDocumento'],
+        totalDocumento: map['TotalDocumento'],
+        fechaEntrega: map['FechaEntrega'],
+        estado: map['Estado'],
+        ruta: map['Ruta'],
+        marchamo: map['Marchamo'],
+        condicionPago: map['CondicionPago'],
+      );
+    }).toList();
+  }
+
 }
 
 
