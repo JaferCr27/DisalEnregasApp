@@ -1,20 +1,33 @@
+import 'package:disal_entregas/components/loader_component.dart';
 import 'package:disal_entregas/models/token.dart';
 import 'package:disal_entregas/models/usuario.dart';
 import 'package:disal_entregas/screens/despachos_screen.dart';
 import 'package:disal_entregas/screens/login_screen.dart';
 import 'package:disal_entregas/screens/sincView_screen.dart';
 import 'package:disal_entregas/screens/user_screen.dart';
+import 'package:disal_entregas/services/data_services.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   final Token token;
-  final Usuario usuario;
-  const HomeScreen({super.key, required this.token,required this.usuario});
+  
+  const HomeScreen({super.key, required this.token});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool _showLoader = false;
+  Usuario _usuario  = Usuario(nombreChofer: '');
+  final _dbHelper = DataServices();
+
+  @override
+  void initState() {
+    _getUser();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                        Navigator.push(
                         context, 
                         MaterialPageRoute(
-                          builder: (context) => UserScreen(usuario: widget.usuario)
+                          builder: (context) => UserScreen(usuario: _usuario)
                           )
                         );
                     },
@@ -41,15 +54,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        body: _getBody(),
-        drawer: _getMenu(),
+        body: _showLoader ? LoaderComponent(text: '...Cargando...',) : _getBody(),
+        drawer: _showLoader ? LoaderComponent(text: '...Cargando...',) : _getMenu(),
     );
   }
-  
   Widget _getBody() {
-    return Column(
+    return 
+    Column(
       children: [
-        Text('Bienvenido ${widget.usuario.nombreChofer}',style: TextStyle(fontWeight: FontWeight.bold),),
+        Text('Bienvenido ${_usuario.nombreChofer}',style: TextStyle(fontWeight: FontWeight.bold),),
         SizedBox(
           height: 240,
           child: 
@@ -58,11 +71,12 @@ class _HomeScreenState extends State<HomeScreen> {
             itemSnapping: true,
             elevation: 4,
             padding: const EdgeInsets.all(8),
-            children: List.generate(5, (int index) {
+            children: List.generate(3, (int index) {
             return Container(
               color: Colors.grey,
               child: Image.network(
-                'https://picsum.photos/400?random=$index',
+                // ignore: prefer_interpolation_to_compose_strings
+                 'https://picsum.photos/400?random=$index',
                 fit: BoxFit.cover,
                 ),
             );
@@ -70,17 +84,18 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ),
         Expanded(
-          child: GridView.count(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10,
-                  primary: false,
-                  padding: const EdgeInsets.all(20),
-                  mainAxisSpacing: 10,
-                  children: <Widget>[
+          child: 
+            GridView.count(
+              crossAxisCount: 3,
+              crossAxisSpacing: 8,
+              padding: const EdgeInsets.all(20),
+              mainAxisSpacing: 10,
+              children: <Widget>[
                     Card(
-                      //color: Color(0xffECEFFD),
+                      elevation: 4,
                       clipBehavior: Clip.hardEdge,
-                      child: InkWell(
+                      child: 
+                      InkWell(
                         splashColor: Colors.blue.withAlpha(30),
                         onTap: () {
                           Navigator.push(
@@ -95,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                              Icon(
                                 Icons.local_shipping, 
-                                color: Color(0xff2354C7), 
+                                color: Color.fromRGBO(52, 75, 115, 1), 
                                 size: 35
                               ), 
                               Text(
@@ -109,7 +124,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                     ),
                     Card(
-                      color: Color(0xffFAEDE7),
                       clipBehavior: Clip.hardEdge,
                       child: InkWell(
                         splashColor: Colors.blue.withAlpha(30),
@@ -121,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                              Icon(
                                 Icons.inventory, 
-                                color: Color(0xff806C2A), 
+                                color: Color.fromRGBO(218, 86, 48, 1), 
                                 size: 35
                               ), 
                               Text(
@@ -135,7 +149,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                     ),
                     Card(
-                      color: Color(0xffFAEDE7),
                       clipBehavior: Clip.hardEdge,
                       child: InkWell(
                         splashColor: Colors.blue.withAlpha(30),
@@ -147,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                              Icon(
                                 Icons.settings, 
-                                color: Color(0xffA44D2A), 
+                                color: Color.fromRGBO(230, 232, 237, 1), 
                                 size: 35
                               ), 
                               Text(
@@ -161,7 +174,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                     ),
                     Card(
-                      color: Color(0xffE5F4E0),
                       clipBehavior: Clip.hardEdge,
                       child: InkWell(
                         splashColor: Colors.blue.withAlpha(30),
@@ -173,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                              Icon(
                                 Icons.support_agent_outlined, 
-                                color: Color(0xff417345), 
+                                color: Color.fromRGBO(100, 132, 188, 1), 
                                 size: 35
                               ), 
                               Text(
@@ -187,7 +199,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                     ),
                     Card(
-                      color: Colors.blue[50],
                       clipBehavior: Clip.hardEdge,
                       child: InkWell(
                         splashColor: Colors.blue.withAlpha(30),
@@ -199,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                              Icon(
                                 Icons.cloud_download, 
-                                color: Colors.blue[900], 
+                                color: Color.fromRGBO(120, 129, 155, 1), 
                                 size: 35
                               ), 
                               Text(
@@ -213,7 +224,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                     ),
                     Card(
-                      color: Colors.blueGrey[100],
                       clipBehavior: Clip.hardEdge,
                       child: InkWell(
                         splashColor: Colors.blue.withAlpha(50),
@@ -230,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                              Icon(
                                 Icons.sync, 
-                                color: Colors.black54, 
+                                color: Color.fromRGBO(99, 130, 175, 1), 
                                 size: 35
                               ), 
                               Text(
@@ -249,7 +259,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
-
   Widget _getMenu() {
     return Drawer(
       child: ListView(
@@ -259,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
             image: AssetImage("assets/Logo_Disal_2023.png")
             )
           ),
-          Center(child: Text('${widget.usuario.chofer} - ${widget.usuario.nombreChofer}')),
+          Center(child: Text('${_usuario.chofer} - ${_usuario.nombreChofer}')),
           ListTile(
             leading: Icon(Icons.local_shipping),
             title: Text("Ruta"),
@@ -282,14 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             leading: Icon(Icons.logout),
             title: Text("Cerrar sesión"),
-            onTap: (){
-              Navigator.pushReplacement(
-              context, 
-              MaterialPageRoute(
-                builder: (context) => LoginScreen()
-                )
-              );
-            },
+            onTap: () => _logOut(),
           ),
           ListTile(
             leading: Icon(Icons.close),
@@ -300,5 +302,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
       ),
     );
+  }
+  Future<void> _getUser() async {
+    setState(() => _showLoader = true);
+    _usuario = await _dbHelper.getUsuario();
+    setState(() => _showLoader = false);
+
+  }
+  void _logOut() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setBool('isRemembered', false) ;
+    await pref.setString('userBody', '');
+    Navigator.pushReplacement(
+      context, 
+      MaterialPageRoute(
+        builder: (context) => LoginScreen()
+        )
+      );
   }
 }

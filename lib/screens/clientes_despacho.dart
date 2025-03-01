@@ -60,101 +60,144 @@ class _ClientesDespachoState extends State<ClientesDespacho> {
     return 
         Column(
           children: [
-            const SizedBox(height: 20,),
             TextField(
               decoration: InputDecoration(
+                isDense: true,
                 labelText: 'Buscar',suffixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10)
                 )
-                
               ),
               onChanged: (value) => filterSearch(value),
             ),
             const SizedBox(height: 20,),
             Expanded(
-              child: ListView.builder(
-                primary: false,
-                itemCount: _clientesFiltro.length,
-                itemBuilder: (context, index) => buildCard(_clientesFiltro[index]),
-              ),
+              child: 
+              CustomScrollView(
+                slivers: [
+                  SliverList(delegate: SliverChildBuilderDelegate((context,index){
+                    return _buildCard(_clientesFiltro[index]);
+                  },
+                  childCount: _clientesFiltro.length
+                  ),),
+                ],
+              )
             ),
           ],
         );
   }
-  Widget buildCard(Cliente client) {
+  Widget _listTiles (Cliente client){
+    return ListTile(
+      onTap: () {
+        Navigator.push(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (context) => DocumentosScreen(
+                      cliente: client.cliente.toString(),
+                      idDespacho : widget.despacho.idDespacho
+                      )
+                    )
+                  );
+      },
+      leading: Icon(Icons.storefront, color: const Color.fromRGBO(100, 132, 188, 1),),
+      title: Text('(${client.cliente}) - ${client.alias}',style: TextStyle( fontWeight: FontWeight.bold),),
+      subtitle: Text(client.direccion.toString().trim()),
+      trailing: 
+        PopupMenuButton(
+          itemBuilder: (context) => [
+            PopupMenuItem(
+              child: Text("Ver documentos"),
+              onTap: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (context) => DocumentosScreen(
+                      cliente: client.cliente.toString(),
+                      idDespacho : widget.despacho.idDespacho
+                      )
+                    )
+                  );
+              },
+              ),
+            PopupMenuItem(
+              child: Text("Detalle Cliente")
+              ),
+            PopupMenuItem(
+              child: Text("Sincronizar")
+              )
+          ],
+        ),
+      isThreeLine: true,
+      dense: true,
+    );
+  }
+  Widget _buildCard(Cliente client) {
     return 
       Card(
         elevation: 4,
         child: 
           InkWell(
             onTap: () {
-              // Navigator.push(
-              //   context, 
-              //   MaterialPageRoute(
-              //     builder: (context) => DocumentosScreen(
-              //       cliente: client.cliente.toString(),
-              //       idDespacho : widget.despacho.idDespacho
-              //       )
-              //     )
-              //   );
+              
             },
             splashColor: Colors.blue.withAlpha(30),
             child: 
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    leading: Icon(Icons.storefront, color: Colors.green[900],),
-                    title: Text('(${client.cliente}) - ${client.alias}',style: TextStyle( fontWeight: FontWeight.bold),),
-                    subtitle: Text(client.direccion.toString().trim()),
-                    trailing: Text(client.secuencia.toString(),style: TextStyle( color: Colors.deepPurpleAccent,fontWeight: FontWeight.bold,fontSize: 14)),
-                    isThreeLine: true,
-                    dense: true,
-                  ),
-                  Row(
-                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(width: 55,),
-                      Text(client.ventanaAtencion1.toString()),
-                      Text(" - "),
-                      Text(client.ventanaAtencion1.toString(),)
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(width: 0,),
-                      Text(client.condicionPagoDesc.toString(),),
-                      SizedBox(width: 90,),
-                      PopupMenuButton(
-                        itemBuilder: (context) => [
-                          PopupMenuItem(
-                            child: Text("Ver documentos"),
-                            onTap: () {
-                              Navigator.push(
-                                context, 
-                                MaterialPageRoute(
-                                  builder: (context) => DocumentosScreen(
-                                    cliente: client.cliente.toString(),
-                                    idDespacho : widget.despacho.idDespacho
-                                    )
-                                  )
-                                );
-                            },
-                            ),
-                          PopupMenuItem(
-                            child: Text("Detalle Cliente")
-                            ),
-                          PopupMenuItem(
-                            child: Text("Sincronizar")
-                            )
-                        ],
-                      )
-                    ],
-                  ),
-                  Text(client.horaLlegada.toString(),style: TextStyle( color: Colors.deepOrange, fontWeight: FontWeight.bold)),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(2),
+                child: 
+                 Column(
+                  children:<Widget>[
+                     _listTiles(client),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     SizedBox(width: 55,),
+                    //     Icon(Icons.schedule),
+                    //     Text(' ${client.ventanaAtencion1}'),
+                    //     Text(" - "),
+                    //     Text(client.ventanaAtencion1.toString(),)
+                    //   ],
+                    // ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     SizedBox(width: 55,),
+                    //     Icon(Icons.person),
+                    //     Text(' ${client.contacto}'),
+                    //   ],
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     SizedBox(width: 55,),
+                    //     Icon(Icons.call),
+                    //     Text(' ${client.telefono}'),
+                    //   ],
+                    // ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.end,
+                    //   children: [
+                    //     CircleAvatar(
+                    //       radius: 15.0,
+                    //       backgroundColor:  Color.fromRGBO(52, 75, 115, 1),
+                    //       child: Text(
+                    //         client.secuencia.toString(),
+                    //         style: 
+                    //           TextStyle( 
+                    //             color: Colors.white,
+                    //             fontWeight: FontWeight.bold,fontSize: 14
+                    //             )
+                    //           ),
+                    //     ),
+                    //     SizedBox(width: 16,),
+                    //   ],
+                    // ),
+                    Chip(
+                      padding: EdgeInsets.all(4.0),
+                      backgroundColor: Color.fromRGBO(218, 86, 48, 1),
+                      label: Text(client.horaLlegada.toString(),style: TextStyle( color: Colors.white, fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
               ),
           ),
       );

@@ -1,36 +1,43 @@
+import 'package:flutter/material.dart';
+
 class Despacho {
   int idDespacho = 0;
   String consecutivo = "";
-  String fecha = "";
+  String? fecha;
   String fechaEntrega = "";
-  String fechaEntregaOrdenar = "";
+  String? fechaEntregaOrdenar;
   int idCamion = 0;
   int idFurgon = 0;
   String horaSalida = "";
   String bodega = "";
   String observacion = "";
   int idRecurso = 0;
-  bool rutaTerminada = false;
+  int? rutaTerminada;
   String fechaHoraRutaTerminada = "";
+  int? cantidadDocs;
 
   Despacho({
      required this.idDespacho,
      required this.consecutivo,
-     required this.fecha,
      required this.fechaEntrega,
-     required this.fechaEntregaOrdenar,
-     required this.idCamion,
-     required this.idFurgon,
-     required this.horaSalida,
-     required this.bodega,
-     required this.observacion,
-     required this.idRecurso,
+     this.fecha,
+     // this.idCamion,
+     //required this.idFurgon,
+     //required this.horaSalida,
+     //required this.bodega,
+     //required this.observacion,
+     //required this.idRecurso,
      required this.rutaTerminada,
-     required this.fechaHoraRutaTerminada
+     //required this.fechaHoraRutaTerminada, 
+     this.cantidadDocs
   });
 
   // Propiedad calculada para el color de fondo
-  // String get backGroundColor => rutaTerminada ? "#46C771" : "#FF602E";
+   String get estado => rutaTerminada == 0 ? "Pediente" : "Finalizado";
+   Icon get iconDes => rutaTerminada == 0 ? 
+   Icon(Icons.warning_amber_rounded,color:Color.fromRGBO(218, 86, 48, 1) ,size: 25,) 
+   : Icon(Icons.check_circle_outline,size: 25,color: Colors.green,);
+   
 
   Despacho.fromJson(Map<String, dynamic> json) {
     idDespacho = json['IdDespacho'];
@@ -44,7 +51,7 @@ class Despacho {
     bodega = json['Bodega'];
     observacion = json['Observacion'];
     idRecurso = json['IdRecurso'];
-    //rutaTerminada = json['RutaTerminada'];
+    rutaTerminada = json['RutaTerminada'] == true ? 1 : 0;
     fechaHoraRutaTerminada = json['FechaHoraRutaTerminada'];
   }
 
@@ -61,7 +68,7 @@ class Despacho {
     data['Bodega'] = bodega;
     data['Observacion'] = observacion;
     data['IdRecurso'] = idRecurso;
-    //data['RutaTerminada'] = rutaTerminada ? 1 : 0;
+    data['RutaTerminada'] = rutaTerminada;
     data['FechaHoraRutaTerminada'] = fechaHoraRutaTerminada;
     return data;
   }

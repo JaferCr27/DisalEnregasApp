@@ -73,8 +73,8 @@ class UserScreen extends StatelessWidget {
       ),
         const SizedBox(height: 8,),
       Text(
-        "Flutter software Enginner",
-        style: TextStyle(fontSize: 20, color: Colors.black),
+        "Agente distribución II GAM / DISAL",
+        style: TextStyle(fontSize: 18, color: Colors.black),
       ),
       const SizedBox(height: 16,),
       Divider(),
@@ -98,7 +98,7 @@ class UserScreen extends StatelessWidget {
             const SizedBox(height: 14,),
             Text(
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis, enim at ultricies ornare, risus risus blandit quam, quis suscipit urna justo eget mass,Sed et condimentum arcu. In hac habitasse platea dictumst. Quisque consectetur libero nisi, at posuere eros suscipit sed. Quisque in aliquam erat. Mauris eget elit et diam ornare hendrerit.",
-              style: TextStyle(fontSize: 18, height: 1.4),
+              style: TextStyle(fontSize: 16, height: 1.4),
             ),
           ],
       ),

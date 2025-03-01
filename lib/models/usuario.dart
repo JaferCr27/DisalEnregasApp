@@ -1,18 +1,18 @@
 class Usuario {
-  final String userName;
-  final String password;
-  final String chofer;
-  final String nombreChofer;
-  final int idRecurso;
-  final bool isRemenber;
+  String? userName;
+  String? password;
+  String? chofer;
+  String nombreChofer;
+  int? idRecurso;
+  bool? isRemenber;
 
    Usuario({
-    required this.userName,
-    required this.password,
+    this.userName,
+    this.password,
     required this.nombreChofer,
-    required this.chofer,
-    required this.isRemenber,
-    required this.idRecurso,
+    this.chofer,
+    this.isRemenber,
+    this.idRecurso,
   });
 
   factory Usuario.fromJson(Map<String, dynamic> json) {
@@ -24,5 +24,16 @@ class Usuario {
       isRemenber: json['IsRemenber'] ?? false,
       idRecurso: json['IdRecurso'] ?? 0,
     );
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    //data['UserName'] = userName;
+    //data['Password'] = password;
+    data['Chofer'] = chofer;
+    data['NombreChofer'] = nombreChofer;
+    data['IdRecurso'] = idRecurso;
+
+   //data['IsRemenber'] = isRemenber;
+    return data;
   }
 }

@@ -19,7 +19,6 @@ class _DespachosScreenState extends State<DespachosScreen> {
   final _dbHelper = DataServices();
   bool _showLoader = false;
   List<Despacho> _despachos = [];
-
   @override
   void initState() {
     super.initState();
@@ -27,34 +26,32 @@ class _DespachosScreenState extends State<DespachosScreen> {
   }
   @override
   Widget build(BuildContext context) {
-        return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text('Disal Entregas',style: TextStyle(fontSize: 15),),
         actions: [
-            Padding(
-              padding: const EdgeInsetsDirectional.only(end: 16.0),
-              child: IconButton(
-                  icon: Icon(Icons.refresh_rounded),
-                  onPressed: () {},
-            ),
-            ),
+            IconButton(
+                  icon: Icon(Icons.sync_rounded),
+                  onPressed: () => _getDespachos(),
+              )
           ],
       ),
-      body: Center(
+      body: 
+      Container(
+        padding: const EdgeInsets.all(8.0),
         child: _showLoader ? LoaderComponent(text: '...Cargando...'): getContent(),
       ),
     );
   }
-
   Future<void> _getDespachos() async {
     setState(() => _showLoader = true);
-    _despachos = await _dbHelper.getAllDespachos();
+    _despachos = await _dbHelper.getDespachos() ;
     setState(() => _showLoader = false);
   }
   Widget getContent() {
     return _despachos.isEmpty
     ? _noContent()
-    : _getListView();
+    : _getBody();
   }
   Widget _noContent() {
     return Container(
@@ -67,72 +64,75 @@ class _DespachosScreenState extends State<DespachosScreen> {
       ),
     );
   }
-
-  Widget _getListView() {
+  Widget buildCard (Despacho despacho){
+    return Container(
+      padding: EdgeInsets.all(2),
+      child: 
+      Card(
+        elevation: 4,
+              child: 
+                InkWell(
+                  onTap:(){
+                    Navigator.push(
+                        context, 
+                        MaterialPageRoute(
+                          builder: (context) => ClientesDespacho(token: widget.token, despacho: despacho)
+                          )
+                        );
+                  },
+                  splashColor: Colors.blue.withAlpha(30),
+                  child: 
+                    Column(
+                      children: [
+                        ListTile(
+                              leading: despacho.iconDes,
+                              title: 
+                              Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                          Text(despacho.consecutivo,style:
+                                          TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold
+                                          ),
+                                          ),
+                                          Chip(
+                                            avatar: CircleAvatar(
+                                              backgroundColor: despacho.rutaTerminada == 0 ? Colors.red : Colors.green,
+                                            ),
+                                            label: Text(despacho.estado),
+                                          )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              subtitle: Text('Fecha: ${despacho.fechaEntrega}',),
+                              dense: true,
+                          ),
+                          ListTile(
+                            subtitle: Text('Clientes: ${despacho.cantidadDocs}',),
+                            trailing: Icon(Icons.keyboard_double_arrow_right),
+                            dense: true,
+                            
+                          )
+                      ],
+                    ) ,
+              ),
+            ),
+    ); 
+  }
+  Widget _getBody() {
     return 
       RefreshIndicator(
         onRefresh: () => _getDespachos(),
-        child: 
-        ListView(
-          children: _despachos.map((e){
-          return 
-          Card(
-            child: 
-              InkWell(
-                onTap:(){
-                  Navigator.push(
-                      context, 
-                      MaterialPageRoute(
-                        builder: (context) => ClientesDespacho(token: widget.token, despacho: e)
-                        )
-                      );
-                },
-                splashColor: Colors.blue.withAlpha(30),
-                child: 
-              Container(
-                margin: EdgeInsets.all(1),
-                child: Column(
-                  children: [
-                     ListTile(
-                          //leading: Icon(Icons.warning_amber_rounded,color: Colors.orangeAccent,size: 25,),
-                          title:  
-                           Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                      Text(e.consecutivo,style:
-                                      TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold
-                                      ),
-                                      ),
-                                      Chip(
-                                        avatar: CircleAvatar(
-                                          backgroundColor: Colors.red,
-                                          //child: const Text('AB'),
-                                        ),
-                                        label: Text("Pendiente"),
-                                      )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          subtitle: Text('Fecha: ${e.fechaEntrega}',),
-                      ),
-                      ListTile(
-                        subtitle: Text('Pendientes: 10 Finalizados: 1',),
-                        trailing: Icon(Icons.keyboard_double_arrow_right),
-                        dense: true,
-        
-                      )
-                  ],
-                ),
-              ) ,
-            ),
-          );
-        }).toList(),
-            ),
+        child:
+          ListView.builder(
+            primary: false,
+            itemCount: _despachos.length,
+            itemBuilder: (context,index) => buildCard(_despachos[index]),
+          )
       );
   }
 }

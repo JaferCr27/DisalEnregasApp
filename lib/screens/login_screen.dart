@@ -1,11 +1,16 @@
 import 'dart:convert';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:disal_entregas/components/loader_component.dart';
+import 'package:disal_entregas/helpers/apiHelper.dart';
 import 'package:disal_entregas/models/token.dart';
 import 'package:disal_entregas/models/usuario.dart';
 import 'package:disal_entregas/screens/home_screen.dart';
+import 'package:disal_entregas/services/data_services.dart';
 import 'package:flutter/material.dart';
 import 'package:disal_entregas/helpers/constans.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -13,8 +18,10 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> {  
   
+  final _dbHelper = DataServices();
+
   String _email = 'E10';
   String _emailError = '';
   bool _emailShowError = false;
@@ -30,18 +37,21 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children :<Widget> [
-              _showLogo(),
-              _showText(),
-              SizedBox(height: 20,),
-              _showEmail(),
-              _showPassword(),
-              _showRemenberme(),
-              _showButton(),
-              _showFooterText()
-            ],
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children :<Widget> [
+                const SizedBox(height: 40,),
+                _showLogo(),
+                _showText(),
+                const SizedBox(height: 20,),
+                _showEmail(),
+                _showPassword(),
+                _showRemenberme(),
+                _showButton(),
+                _showFooterText()
+              ],
+            ),
           ),
           _showLoader ? LoaderComponent(text: 'Por favor espere',): Container()
         ],
@@ -158,36 +168,51 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
   Widget _showButton() {
-    return Column(
-      children: [
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll<Color>(Colors.blueAccent),
-            ),
-            onPressed: () => _login(),
-            child: 
-            Text(
-              "Iniciar sesión",
-              style:
-              TextStyle (
-                fontWeight: FontWeight.bold,
-                color: Colors.white
-              ),   
-            )
-            ),
-      ],
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: 
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: StadiumBorder(),
+                elevation: 20,
+                minimumSize: const Size.fromHeight(60),
+                backgroundColor: Color.fromRGBO(52, 75, 115, 1)
+              ),
+              onPressed: () => _login(),
+              child: 
+                Text(
+                  "Iniciar sesión",
+                  style:
+                  TextStyle (
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white
+                  ),   
+                )
+              ),
     );
   }
   void _login() async {
-    setState(() {
-      _showPass = false;
-    });
+    setState(()=>_showPass = false);
     if (!_validateFields()){
       return;
     }
-    setState(() {
-      _showLoader = true;
-    });
+    setState(()=>_showLoader = true);
+
+    var conectivityResult = await Connectivity().checkConnectivity();
+    if (conectivityResult == ConnectivityResult.none) {
+      setState(() {
+      _showLoader = false;
+      });
+      await showAlertDialog(
+        context: context,
+        title: 'Error', 
+        message: 'Verifica que estes conectado a internet.',
+        actions: <AlertDialogAction>[
+            AlertDialogAction(key: null, label: 'Aceptar'),
+        ]
+      );    
+      return;
+    }
     var url = Uri.parse("${Constans.apiUrlTest}/token");
     var response = await http.post(
       url,
@@ -198,32 +223,36 @@ class _LoginScreenState extends State<LoginScreen> {
         'password': Uri.encodeComponent(_passWord),
       },
     );
-    setState(() {
-      _showLoader = false;
-    });    
-    var decodedJson = jsonDecode(response.body);
-    var token = Token.fromJson(decodedJson);
-    var urlUser = Uri.parse("${Constans.apiUrlTest}/api/Sync/Consultas");
-    var responseUsuario = await http.post(
-        urlUser,
-        headers: {
-          'Authorization': '${token.tokenType} ${token.accessToken}',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({'Opcion':'CNC','grant_type': 'password'}),
-      );
-    var usuario = parseUsuarios(responseUsuario.body);
     if(response.statusCode >= 400){
       setState(() {
         _passWordShowError = true;
-        _passWordError = token.errorDescription;        
+        _passWordError = response.body;        
       });
       return;
     }
+    var decode = jsonDecode(response.body);
+    var token = Token.fromJson(decode);
+
+    _storeUser(response.body);
+
+
+    var usuario = await Apihelper.post('CNC', token.accessToken);
+    if (!usuario.isSuccess) {
+       setState(() {
+        _passWordShowError = true;
+        _passWordError = usuario.message;        
+      });
+      return;
+    }
+    _dbHelper.insertar(usuario.result
+        .map<Usuario>((json) => Usuario.fromJson(json))
+        .toList(), 'UsuarioModel');
+
+    setState(() => _showLoader = false);
     Navigator.pushReplacement(
       context, 
       MaterialPageRoute(
-        builder: (context) => HomeScreen(token: token,usuario: usuario,)
+        builder: (context) => HomeScreen(token: token,)
         )
       );
   }
@@ -249,8 +278,10 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {});
       return isValid;
     }
-  Usuario parseUsuarios(String jsonString) {
-    List<dynamic> jsonList = jsonDecode(jsonString); // Decodificar JSON a lista dinámica
-    return jsonList.map((json) => Usuario.fromJson(json)).toList().first;
+  void _storeUser(String body) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setBool('isRemembered', true) ;
+    await pref.setString('userBody', body) ;
+
   }
 }

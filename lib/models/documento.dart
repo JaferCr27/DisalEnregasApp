@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Documento {
-  int? idDocumento;
+  int idDocumento;
   String? documento;
   String? fechaDocumento;
   String? fechaEntrega;
@@ -31,7 +31,7 @@ class Documento {
   String? marchamo;
 
   Documento({
-      this.idDocumento,
+      required this.idDocumento,
       this.documento,
       this.fechaDocumento,
       this.fechaEntrega,
@@ -60,13 +60,6 @@ class Documento {
       this.idDespacho,
       this.marchamo
     });
-
-    String get estadoDesc {
-      if (estado == "PEND") {
-        return "Pendiente";
-      }
-      return "";
-    }
     String get tipoDocDesc {
       const Map<String, String> tipos = {
         "FACT": "Factura",
@@ -74,11 +67,18 @@ class Documento {
       };
       return tipos[tipoDocumento ?? ""] ?? "";
     }
-     Icon get IconDoc {
-      if (tipoDocumento == "FACT") {
-        return Icon(Icons.receipt_long, color: Colors.green[900],);
+
+    String get estadoDesc {
+      if (estado == "PEND") {
+        return "Pendiente";
       }
-      return Icon(Icons.inventory_2, color: Colors.orange,);
+      return "";
+    }
+    Icon get IconDoc {
+      if (tipoDocumento == "FACT") {
+        return const Icon(Icons.receipt_long, color: Color.fromRGBO(218, 86, 48, 1),);
+      }
+      return const Icon(Icons.inventory_2, color: Color.fromRGBO(52, 75, 115, 1),);
     }
 
 
@@ -117,34 +117,34 @@ class Documento {
     }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['IdDocumento'] = this.idDocumento;
-    data['Documento'] = this.documento;
-    data['FechaDocumento'] = this.fechaDocumento;
-    data['FechaEntrega'] = this.fechaEntrega;
-    data['Cliente'] = this.cliente;
-    data['TotalDocumento'] = this.totalDocumento;
-    data['Impuesto'] = this.impuesto;
-    data['Descuento'] = this.descuento;
-    data['DescuentoVolumen'] = this.descuentoVolumen;
-    data['Moneda'] = this.moneda;
-    data['OrdenCompra'] = this.ordenCompra;
-    data['Pedido'] = this.pedido;
-    data['TipoDocumento'] = this.tipoDocumento;
-    data['NivelPrecio'] = this.nivelPrecio;
-    data['Version'] = this.version;
-    data['CondicionPago'] = this.condicionPago;
-    data['Ruta'] = this.ruta;
-    data['Condicionada'] = this.condicionada;
-    data['Bodega'] = this.bodega;
-    data['Estado'] = this.estado;
-    data['IdRechazo'] = this.idRechazo;
-    data['Naturaleza'] = this.naturaleza;
-    data['IdMotivo'] = this.idMotivo;
-    data['EstadoERP'] = this.estadoERP;
-    data['IdRecurso'] = this.idRecurso;
-    data['EntregaNula'] = this.entregaNula;
-    data['IdDespacho'] = this.idDespacho;
-    data['Marchamo'] = this.marchamo;
+    data['IdDocumento'] = idDocumento;
+    data['Documento'] = documento;
+    data['FechaDocumento'] = fechaDocumento;
+    data['FechaEntrega'] = fechaEntrega;
+    data['Cliente'] = cliente;
+    data['TotalDocumento'] = totalDocumento;
+    data['Impuesto'] = impuesto;
+    data['Descuento'] = descuento;
+    data['DescuentoVolumen'] = descuentoVolumen;
+    data['Moneda'] = moneda;
+    data['OrdenCompra'] = ordenCompra;
+    data['Pedido'] = pedido;
+    data['TipoDocumento'] = tipoDocumento;
+    data['NivelPrecio'] = nivelPrecio;
+    data['Version'] = version;
+    data['CondicionPago'] = condicionPago;
+    data['Ruta'] = ruta;
+    data['Condicionada'] = condicionada;
+    data['Bodega'] = bodega;
+    data['Estado'] = estado;
+    data['IdRechazo'] = idRechazo;
+    data['Naturaleza'] = naturaleza;
+    data['IdMotivo'] = idMotivo;
+    data['EstadoERP'] = estadoERP;
+    data['IdRecurso'] = idRecurso;
+    data['EntregaNula'] = entregaNula;
+    data['IdDespacho'] = idDespacho;
+    data['Marchamo'] = marchamo;
     return data;
   }
 }
