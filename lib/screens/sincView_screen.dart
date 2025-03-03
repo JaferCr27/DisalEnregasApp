@@ -57,7 +57,7 @@ class _SincviewScreenState extends State<SincviewScreen> {
             ),
             SizedBox(height: 150,),
             Center(
-              child: _showLoader ? LoaderComponent(text: '...Cargando...') : Text("Datos de inicio sincronizados con éxito",style: TextStyle( fontWeight: FontWeight.bold, fontSize: 16)),
+              child: _showLoader ? LoaderComponent(text: '...Cargando...') : Text(_errorMessage,style: TextStyle( fontWeight: FontWeight.bold, fontSize: 16)),
             ),
           ],
         ),
