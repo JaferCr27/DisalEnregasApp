@@ -1,33 +1,22 @@
-import 'package:disal_entregas/components/loader_component.dart';
 import 'package:disal_entregas/models/token.dart';
 import 'package:disal_entregas/models/usuario.dart';
 import 'package:disal_entregas/screens/despachos_screen.dart';
 import 'package:disal_entregas/screens/login_screen.dart';
 import 'package:disal_entregas/screens/sincView_screen.dart';
 import 'package:disal_entregas/screens/user_screen.dart';
-import 'package:disal_entregas/services/data_services.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   final Token token;
+  final Usuario usuario;
   
-  const HomeScreen({super.key, required this.token});
+  const HomeScreen({super.key, required this.token,required this.usuario});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _showLoader = false;
-  Usuario _usuario  = Usuario(nombreChofer: '');
-  final _dbHelper = DataServices();
-
-  @override
-  void initState() {
-    _getUser();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                        Navigator.push(
                         context, 
                         MaterialPageRoute(
-                          builder: (context) => UserScreen(usuario: _usuario)
+                          builder: (context) => UserScreen(usuario: widget.usuario)
                           )
                         );
                     },
@@ -54,15 +43,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        body: _showLoader ? LoaderComponent(text: '...Cargando...',) : _getBody(),
-        drawer: _showLoader ? LoaderComponent(text: '...Cargando...',) : _getMenu(),
+        body:  _getBody(),
+        drawer: _getMenu(),
     );
   }
   Widget _getBody() {
     return 
     Column(
       children: [
-        Text('Bienvenido ${_usuario.nombreChofer}',style: TextStyle(fontWeight: FontWeight.bold),),
+        Text('Bienvenido ${widget.usuario.nombreChofer}',style: TextStyle(fontWeight: FontWeight.bold),),
         SizedBox(
           height: 240,
           child: 
@@ -268,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
             image: AssetImage("assets/Logo_Disal_2023.png")
             )
           ),
-          Center(child: Text('${_usuario.chofer} - ${_usuario.nombreChofer}')),
+          Center(child: Text('${widget.usuario.chofer} - ${widget.usuario.nombreChofer}')),
           ListTile(
             leading: Icon(Icons.local_shipping),
             title: Text("Ruta"),
@@ -303,16 +292,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-  Future<void> _getUser() async {
-    setState(() => _showLoader = true);
-    _usuario = await _dbHelper.getUsuario();
-    setState(() => _showLoader = false);
-
-  }
   void _logOut() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setBool('isRemembered', false) ;
     await pref.setString('userBody', '');
+    await pref.setString('nombreChofer', '');
     Navigator.pushReplacement(
       context, 
       MaterialPageRoute(

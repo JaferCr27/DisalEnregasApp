@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:disal_entregas/models/token.dart';
+import 'package:disal_entregas/models/usuario.dart';
 import 'package:disal_entregas/screens/home_screen.dart';
 import 'package:disal_entregas/screens/login_screen.dart';
 import 'package:disal_entregas/screens/wait_screen.dart';
@@ -23,6 +24,7 @@ class _MyAppState extends State<MyApp> {
   bool _isLoading = true;
   bool _showLoginPage = true;
   late Token _token;
+  late Usuario _usuario;
 
   @override
   void initState() {
@@ -39,24 +41,26 @@ class _MyAppState extends State<MyApp> {
         // cardColor: Color.fromRGBO(230, 232, 237, 1),
         // scaffoldBackgroundColor: Color.fromRGBO(230, 232, 237, 1),
         // focusColor: Color.fromRGBO(52, 75, 115, 1)
-        //brightness: Brightness.dark
+        // brightness: Brightness.dark
       ),
       home: _isLoading 
         ? WaitScreen() 
         : _showLoginPage 
           ? LoginScreen() 
-          : HomeScreen(token: _token),
+          : HomeScreen(token: _token,usuario: _usuario ,),
     );
   }
   
   void _getHome() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     bool isRemenber = pref.getBool('isRemembered') ?? false ;
-    if (isRemenber) {
+    if (isRemenber) {    
       String? userBody = pref.getString('userBody');
+      String? nombreChofer = pref.getString('nombreChofer');
       if (userBody != null) {
         var decodedJson = jsonDecode(userBody);
         _token = Token.fromJson(decodedJson);
+        _usuario = Usuario(nombreChofer: nombreChofer.toString());
         if (DateTime.parse(_token.expiresIn.toString()).isAfter(DateTime.now())) {
           _showLoginPage = false;
         }

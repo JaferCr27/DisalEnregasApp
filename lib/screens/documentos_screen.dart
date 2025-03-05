@@ -1,8 +1,10 @@
 import 'package:disal_entregas/components/loader_component.dart';
+import 'package:disal_entregas/helpers/locationHelper.dart';
 import 'package:disal_entregas/models/documento.dart';
 import 'package:disal_entregas/screens/documento_detalle_screen.dart';
 import 'package:disal_entregas/services/data_services.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 class DocumentosScreen extends StatefulWidget {
@@ -92,6 +94,7 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
               width: double.infinity,
               child: 
                 ElevatedButton(
+                  onPressed: _iniciarVisita(), 
                   style: ElevatedButton.styleFrom(
                     shape: const StadiumBorder(),
                     elevation: 20,
@@ -108,9 +111,6 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
                         color: Colors.white
                       ),   
                     ),
-                    onPressed: () {  
-                    }, 
-                
                 ),
               )
           ],
@@ -186,4 +186,15 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
         _documentosFiltro = results;
       });
     }
+    
+   _iniciarVisita() async {
+
+    Position? position = await LocationHelper.getCurrentLocation();
+    if (position != null) {
+        print ("Latitud: ${position.latitude}, Longitud: ${position.longitude}");
+
+    } else {
+        print("No se pudo obtener la ubicación.");
+    }
+  }
 }

@@ -27,7 +27,7 @@
     },
     {
       "name": "archive",
-      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/archive-4.0.3",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/archive-4.0.4",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -152,6 +152,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "fixnum",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/fixnum-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///C:/src/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -186,6 +192,42 @@
       "rootUri": "file:///C:/src/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.7"
+    },
+    {
+      "name": "geolocator",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/geolocator-13.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "geolocator_android",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/geolocator_android-4.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "geolocator_apple",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/geolocator_apple-2.3.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "geolocator_platform_interface",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/geolocator_platform_interface-4.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "geolocator_web",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/geolocator_web-4.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "geolocator_windows",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/geolocator_windows-0.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
     },
     {
       "name": "gradient_borders",
@@ -261,7 +303,7 @@
     },
     {
       "name": "macos_ui",
-      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/macos_ui-2.1.9",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/macos_ui-2.1.10",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -398,6 +440,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "sprintf",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/sprintf-7.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sqflite",
       "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/sqflite-2.4.2",
       "packageUri": "lib/",
@@ -476,6 +524,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "uuid",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-4.5.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -489,7 +543,7 @@
     },
     {
       "name": "web",
-      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/web-1.1.0",
+      "rootUri": "file:///C:/Users/jbarrera/AppData/Local/Pub/Cache/hosted/pub.dev/web-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -518,7 +572,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-02-28T20:50:01.744753Z",
+  "generated": "2025-03-05T20:35:38.831284Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///C:/src/flutter",

@@ -233,7 +233,6 @@ class _LoginScreenState extends State<LoginScreen> {
     var decode = jsonDecode(response.body);
     var token = Token.fromJson(decode);
 
-    _storeUser(response.body);
 
 
     var usuario = await Apihelper.post('CNC', token.accessToken);
@@ -244,15 +243,19 @@ class _LoginScreenState extends State<LoginScreen> {
       });
       return;
     }
-    _dbHelper.insertar(usuario.result
+    var user = usuario.result
         .map<Usuario>((json) => Usuario.fromJson(json))
-        .toList(), 'UsuarioModel');
+        .toList();
+    _dbHelper.insertar(user, 'UsuarioModel');
+
+    _storeUser(response.body, user.first );
+
 
     setState(() => _showLoader = false);
     Navigator.pushReplacement(
       context, 
       MaterialPageRoute(
-        builder: (context) => HomeScreen(token: token,)
+        builder: (context) => HomeScreen(token: token, usuario: user.first,)
         )
       );
   }
@@ -278,10 +281,11 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {});
       return isValid;
     }
-  void _storeUser(String body) async {
+  void _storeUser(String body, Usuario usuario) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setBool('isRemembered', true) ;
     await pref.setString('userBody', body) ;
+    await pref.setString('nombreChofer', usuario.nombreChofer) ;
 
   }
 }

@@ -18,7 +18,7 @@ class Documento {
   int? version;
   int? condicionPago;
   String? ruta;
-  bool? condicionada;
+  int? condicionada;
   String? bodega;
   String? estado;
   int? idRechazo;
@@ -26,7 +26,7 @@ class Documento {
   int? idMotivo;
   String? estadoERP;
   int? idRecurso;
-  bool? entregaNula;
+  int? entregaNula;
   int? idDespacho;
   String? marchamo;
 
@@ -102,7 +102,7 @@ class Documento {
         version : json['Version'],
         condicionPago : json['CondicionPago'],
         ruta : json['Ruta'],
-        condicionada :  bool.tryParse(json['Condicionada'].toString()),
+        condicionada :  json['Condicionada'] == true ? 1 : 0,
         bodega : json['Bodega'],
         estado : json['Estado'],
         idRechazo : json['IdRechazo'],
@@ -110,13 +110,13 @@ class Documento {
         idMotivo : json['IdMotivo'],
         estadoERP : json['EstadoERP'],
         idRecurso : json['IdRecurso'],
-        entregaNula : bool.tryParse(json['EntregaNula'].toString()) ,
+        entregaNula :json['EntregaNula']== true ? 1 : 0 ,
         idDespacho : json['IdDespacho'],
         marchamo : json['Marchamo'],
       );
     }
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['IdDocumento'] = idDocumento;
     data['Documento'] = documento;
     data['FechaDocumento'] = fechaDocumento;

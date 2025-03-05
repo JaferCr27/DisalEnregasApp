@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:disal_entregas/components/loader_component.dart';
 import 'package:disal_entregas/helpers/apiHelper.dart';
 import 'package:disal_entregas/models/articulo.dart';
@@ -9,13 +8,11 @@ import 'package:disal_entregas/models/documento.dart';
 import 'package:disal_entregas/models/documento_linea.dart';
 import 'package:disal_entregas/models/evento.dart';
 import 'package:disal_entregas/models/registro_evento.dart';
-import 'package:disal_entregas/models/response.dart';
 import 'package:disal_entregas/models/vendedor.dart';
 import 'package:disal_entregas/services/data_services.dart';
 import 'package:flutter/material.dart';
 import 'package:disal_entregas/models/token.dart';
 import 'package:disal_entregas/helpers/constans.dart';
-import 'package:http/http.dart' as http;
 
 class SincviewScreen extends StatefulWidget {
   final Token token;

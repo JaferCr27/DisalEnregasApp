@@ -11,7 +11,7 @@ class Articulo {
   String? cabyS;
   double? costo;
   String? tipo;
-  bool? esArroz;
+  int? esArroz;
 
   Articulo(
       {this.articulo,
@@ -41,7 +41,7 @@ class Articulo {
     cabyS = json['CabyS'];
     costo = json['Costo'];
     tipo = json['Tipo'];
-    esArroz = json['EsArroz'];
+    esArroz = json['EsArroz'] == true ? 1 : 0;
   }
 
   Map<String, dynamic> toJson() {

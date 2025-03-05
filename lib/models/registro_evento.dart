@@ -13,7 +13,7 @@ class RegistroEvento {
   int? idMotivo;
   String? fechaCreacionMovil;
   String? fechaHora;
-  bool? transmitido;
+  int? transmitido;
   int? idDocumento;
   String? evento;
 
@@ -51,7 +51,7 @@ class RegistroEvento {
     idMotivo = json['IdMotivo'];
     fechaCreacionMovil = json['FechaCreacionMovil'];
     fechaHora = json['FechaHora'];
-    transmitido = json['Transmitido'];
+    transmitido = json['Transmitido'] == true ? 1 : 0;
     idDocumento = json['IdDocumento'];
     evento = json['Evento'];
   }

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:disal_entregas/models/cliente.dart';
 import 'package:disal_entregas/models/despacho.dart';
-import 'package:disal_entregas/models/despacho_documento.dart';
 import 'package:disal_entregas/models/documento.dart';
 import 'package:disal_entregas/models/documento_linea.dart';
 import 'package:disal_entregas/models/usuario.dart';
@@ -410,41 +409,12 @@ class DataServices {
       );
     }).toList();
   }
-
-
-
- Future<Usuario> getUsuario() async {
+  Future<Usuario> getUsuario() async {
     final db = await getDatabase();
     final List<Map<String, dynamic>> usuarios = await db.query('UsuarioModel');
     return Usuario.fromJson(usuarios.first);
   }
 }
-
-
-  // Future<void> insertarClientes(List<Cliente> clientes) async {
-  //   final db = await getDatabase();
-  //   final batch = db.batch();
-  //   for (var cliente in clientes) {
-  //     batch.insert('ClienteModel', cliente.toJson());
-  //   }
-  //   await batch.commit(noResult: true); 
-  // }
-  // Future<void> insertDespachoDocs(List<DespachoDocumento> despachoDocumentos) async {
-  //   final db = await getDatabase();
-  //   final batch = db.batch();
-  //   for (var despachoDocs in despachoDocumentos) {
-  //     batch.insert('DespachoDocumento', despachoDocs.toJson());
-  //   }
-  //   await batch.commit(noResult: true);
-  // }
-  // Future<void> insertarDocumentos(List<Documento> documentos) async {
-  //   final db = await getDatabase();
-  //   final batch = db.batch();
-  //   for (var despachoDocs in documentos) {
-  //     batch.insert('DocumentoModel', despachoDocs.toJson());
-  //   }
-  //   await batch.commit(noResult: true);
-  // }  
   // Método para eliminar la base de datos
   // Future<void> deleteDB() async {
   //   final path = await getDatabasesPath();

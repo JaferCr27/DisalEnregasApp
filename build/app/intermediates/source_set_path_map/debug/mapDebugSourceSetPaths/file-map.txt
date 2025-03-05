@@ -47,8 +47,9 @@ com.example.disal_entregas.app-resValues-45 C:\Users\jbarrera\Desktop\flutter\di
 com.example.disal_entregas.app-packageDebugResources-46 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\app\intermediates\incremental\debug\packageDebugResources\merged.dir
 com.example.disal_entregas.app-packageDebugResources-47 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\app\intermediates\incremental\debug\packageDebugResources\stripped.dir
 com.example.disal_entregas.app-debug-48 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\app\intermediates\merged_res\debug\mergeDebugResources
-com.example.disal_entregas.app-debug-49 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\connectivity_plus\intermediates\packaged_res\debug\packageDebugResources
-com.example.disal_entregas.app-debug-50 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color\intermediates\packaged_res\debug\packageDebugResources
-com.example.disal_entregas.app-debug-51 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\flutter_native_splash\intermediates\packaged_res\debug\packageDebugResources
-com.example.disal_entregas.app-debug-52 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\shared_preferences_android\intermediates\packaged_res\debug\packageDebugResources
-com.example.disal_entregas.app-debug-53 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\sqflite_android\intermediates\packaged_res\debug\packageDebugResources
+com.example.disal_entregas.app-debug-49 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\bluetooth_print\intermediates\packaged_res\debug\packageDebugResources
+com.example.disal_entregas.app-debug-50 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\connectivity_plus\intermediates\packaged_res\debug\packageDebugResources
+com.example.disal_entregas.app-debug-51 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color\intermediates\packaged_res\debug\packageDebugResources
+com.example.disal_entregas.app-debug-52 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\flutter_native_splash\intermediates\packaged_res\debug\packageDebugResources
+com.example.disal_entregas.app-debug-53 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\shared_preferences_android\intermediates\packaged_res\debug\packageDebugResources
+com.example.disal_entregas.app-debug-54 C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\sqflite_android\intermediates\packaged_res\debug\packageDebugResources
