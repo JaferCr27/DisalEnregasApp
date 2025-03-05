@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.disal_entregas.app-mergeDebugResources-46:/values-en-rIN/values-en-rIN.xml",
+            "outputFile": "com.example.disal_entregas.app-mergeDebugResources-48:/values-en-rIN/values-en-rIN.xml",
             "map": [
                 {
                     "source": "C:\\Users\\jbarrera\\.gradle\\caches\\8.10.2\\transforms\\8cf478dec41eed746328fa8046755ba2\\transformed\\core-1.13.1\\res\\values-en-rIN\\values-en-rIN.xml",

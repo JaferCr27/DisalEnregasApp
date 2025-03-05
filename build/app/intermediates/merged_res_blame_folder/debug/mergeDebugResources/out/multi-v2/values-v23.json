@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.disal_entregas.app-mergeDebugResources-46:/values-v23/values-v23.xml",
+            "outputFile": "com.example.disal_entregas.app-mergeDebugResources-48:/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "C:\\Users\\jbarrera\\.gradle\\caches\\8.10.2\\transforms\\eea6bc447011882d6b95909c5f8bbb72\\transformed\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",

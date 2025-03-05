@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.disal_entregas.app-mergeDebugResources-46:/values-v16/values-v16.xml",
+            "outputFile": "com.example.disal_entregas.app-mergeDebugResources-48:/values-v16/values-v16.xml",
             "map": [
                 {
                     "source": "C:\\Users\\jbarrera\\.gradle\\caches\\8.10.2\\transforms\\5f3e4f018e4d28926a4074739ff3581b\\transformed\\appcompat-1.5.0\\res\\values-v16\\values-v16.xml",

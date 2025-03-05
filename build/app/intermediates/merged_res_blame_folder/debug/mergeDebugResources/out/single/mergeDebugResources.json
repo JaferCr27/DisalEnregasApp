@@ -1,74 +1,74 @@
 [
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-mdpi_branding.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-mdpi/branding.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-hdpi_splash.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-hdpi/splash.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-xxxhdpi_splash.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-xxxhdpi/splash.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-v21_background.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-v21/background.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-mdpi_branding.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-mdpi/branding.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-xxhdpi_branding.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-xxhdpi/branding.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-mdpi_splash.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-mdpi/splash.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-mdpi_splash.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-mdpi/splash.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-xxhdpi_branding.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-xxhdpi/branding.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-v21_launch_background.xml.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-v21/launch_background.xml"
+        "merged": "com.example.disal_entregas.app-debug-50:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-hdpi_branding.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-hdpi/branding.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-xxxhdpi_branding.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-xxxhdpi/branding.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/mipmap-xxhdpi/ic_launcher.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-xxhdpi_splash.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-xxhdpi/splash.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-xhdpi_splash.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-xhdpi/splash.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-night-v21_launch_background.xml.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-night-v21/launch_background.xml"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/mipmap-mdpi/ic_launcher.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-xhdpi_branding.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-xhdpi/branding.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-xhdpi_branding.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-xhdpi/branding.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-xxxhdpi_splash.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-xxxhdpi/splash.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-hdpi_branding.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-hdpi/branding.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-xxhdpi_splash.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-xxhdpi/splash.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-night-v21_launch_background.xml.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-night-v21/launch_background.xml"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-v21_launch_background.xml.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-v21/launch_background.xml"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-hdpi_splash.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-hdpi/splash.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-xhdpi_splash.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-xhdpi/splash.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/drawable-xxxhdpi_branding.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/drawable-xxxhdpi/branding.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.disal_entregas.app-debug-48:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.example.disal_entregas.app-main-43:/mipmap-hdpi/ic_launcher.png"
+        "merged": "com.example.disal_entregas.app-debug-50:/drawable-v21_background.png.flat",
+        "source": "com.example.disal_entregas.app-main-45:/drawable-v21/background.png"
     }
 ]

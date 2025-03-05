@@ -94,7 +94,9 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
               width: double.infinity,
               child: 
                 ElevatedButton(
-                  onPressed: _iniciarVisita(), 
+                  onPressed: () =>(){
+                    _iniciarVisita();
+                  }, 
                   style: ElevatedButton.styleFrom(
                     shape: const StadiumBorder(),
                     elevation: 20,
@@ -187,7 +189,7 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
       });
     }
     
-   _iniciarVisita() async {
+   void _iniciarVisita() async {
 
     Position? position = await LocationHelper.getCurrentLocation();
     if (position != null) {

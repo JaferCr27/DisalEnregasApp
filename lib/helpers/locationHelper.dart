@@ -32,7 +32,7 @@ class LocationHelper{
     return await Geolocator.getCurrentPosition(locationSettings: LocationSettings(
       accuracy: LocationAccuracy.high,
       distanceFilter: 100,
-      timeLimit: Duration(minutes: 1)
+      timeLimit: Duration(seconds: 30)
       )
     );
   }
