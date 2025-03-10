@@ -3,6 +3,9 @@ import 'package:disal_entregas/models/cliente.dart';
 import 'package:disal_entregas/models/despacho.dart';
 import 'package:disal_entregas/models/documento.dart';
 import 'package:disal_entregas/models/documento_linea.dart';
+import 'package:disal_entregas/models/evento.dart';
+import 'package:disal_entregas/models/registro_evento.dart';
+import 'package:disal_entregas/models/response.dart';
 import 'package:disal_entregas/models/usuario.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -220,6 +223,54 @@ class DataServices {
           )       
           '''
     );
+    db.execute('''
+      CREATE TABLE CobroModel ( 
+        IdCobroMovil integer primary key autoincrement not null , 
+        IdCobro integer , 
+        Version integer , 
+        IdRecurso integer , 
+        IdDespacho integer , 
+        CantDocumentos integer , 
+        Sincronizado integer , 
+        MontoTotal float , 
+        Cliente varchar , 
+        Estado varchar 
+      )
+      '''
+    );
+    db.execute('''
+      CREATE TABLE RechazoModel ( 
+				IdRechazoModel integer primary key autoincrement not null , 
+				IdRechazo integer , 
+				IdDocumento integer , 
+				Version integer , 
+				IdMotivo integer , 
+				IdRecurso integer , 
+				MontoSiv float , 
+				MontoSinvAnt float , 
+				MontoIv float , 
+				MontoIvAnt float , 
+				Total float , 
+				TotalAnt float , 
+				TieneDiferencia integer , 
+				Sincronizado integer , 
+				NumComprobante varchar , 
+				Estado varchar , 
+				ResponsableDiferencia varchar , 
+				Origen varchar , 
+				Bodega varchar , 
+				DeNumComprobante varchar , 
+				EstadoDesc varchar , 
+				Cliente varchar , 
+				Alias varchar , 
+				TipoDocumento varchar , 
+				TipoDocumentoDesc varchar , 
+				MotivoDesc varchar 
+			)
+      '''
+    );
+
+
 /**
  * Estos campos no se si se usan en la tabla cliente
  * ItemCount integer , 
@@ -272,7 +323,7 @@ class DataServices {
     await db.delete('ArticuloModel'); 
     await db.delete('UsuarioModel'); 
   }
-  // Inserts
+  // Insert generico
   Future<void> insertar(List<dynamic> lista, String modelo) async {
     final db = await getDatabase();
     final batch = db.batch();
@@ -359,7 +410,7 @@ class DataServices {
                doc.Ruta,
                doc.Marchamo, 
                doc.CondicionPago,
-               doc.CondicionPago
+               doc.Cliente
         FROM Despacho d 
         INNER JOIN DespachoDocumento dd ON d.IdDespacho = dd.IdDespacho
         INNER JOIN DocumentoModel doc ON dd.IdDocumento = doc.IdDocumento
@@ -377,6 +428,7 @@ class DataServices {
         ruta: map['Ruta'],
         marchamo: map['Marchamo'],
         condicionPago: map['CondicionPago'],
+        cliente:map['Cliente']
       );
     }).toList();
   }
@@ -413,6 +465,56 @@ class DataServices {
     final db = await getDatabase();
     final List<Map<String, dynamic>> usuarios = await db.query('UsuarioModel');
     return Usuario.fromJson(usuarios.first);
+  }
+  Future<Evento> getEvento(String evento) async{
+    final db = await getDatabase();
+    final List<Map<String, dynamic>> eventos = await db.rawQuery(
+      '''
+        SELECT 
+          IdEvento,
+          Evento,
+          Descripcion
+        FROM EventoModel 
+        WHERE Evento = ? 
+      ''', [evento]
+      ); 
+    return Evento.fromJson(eventos.first);
+  }
+  Future<bool> getInicioFin(String cliente, int idDespacho, String evento) async {
+    final db = await getDatabase();
+    final List<Map<String, dynamic>> eventos = await db.rawQuery(
+      '''
+        SELECT 
+          Evento,
+          Cliente,
+          IdDespacho
+        FROM RegistroEventoModel 
+        WHERE Cliente = ? and IdDespacho = ? and Evento = ?
+      ''', [cliente,idDespacho,evento]
+      ); 
+    // var a = eventos.map((map){
+    //    return RegistroEvento(
+    //       evento: map[Evento],
+    //       cliente: map[Cliente],
+    //       idDespacho: map[IdDespacho]
+    //     );
+    // }).toList();
+    return eventos.isNotEmpty;
+  }
+  Future<Response> actualizarDocumento(int idDocumento, String estado, int idMotivo) async {
+    try {
+      final db = await getDatabase();
+      await db.update('DocumentoModel',
+      {
+          'Estado': estado,
+          'IdMotivo': idMotivo
+      },
+      where: 'IdDocumento = ?',
+      whereArgs: [idDocumento],);
+      return Response(isSuccess: true, message: 'Se marco como entrega nula el documento');
+    } catch (e) {
+      return Response(isSuccess: false, message: e.toString());
+    }
   }
 }
   // Método para eliminar la base de datos

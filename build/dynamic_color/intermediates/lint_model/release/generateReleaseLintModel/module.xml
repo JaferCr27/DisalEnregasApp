@@ -1,0 +1,19 @@
+<lint-module
+    format="1"
+    dir="C:\Users\jbarrera\AppData\Local\Pub\Cache\hosted\pub.dev\dynamic_color-1.7.0\android"
+    name=":dynamic_color"
+    type="LIBRARY"
+    maven="io.material.plugins.dynamic_color:dynamic_color:1.0-SNAPSHOT"
+    agpVersion="8.7.0"
+    buildFolder="C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color"
+    bootClassPath="C:\Users\jbarrera\AppData\Local\Android\sdk\platforms\android-31\android.jar;C:\Users\jbarrera\AppData\Local\Android\sdk\build-tools\34.0.0\core-lambda-stubs.jar"
+    javaSourceLevel="1.8"
+    compileTarget="android-31"
+    neverShrinking="true">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>

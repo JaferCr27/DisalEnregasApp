@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class DocumentoDetalleScreen extends StatefulWidget {
   final Documento documento;
+  final int idDespacho;
 
-  const DocumentoDetalleScreen({super.key, required this.documento});
+  const DocumentoDetalleScreen({super.key, required this.documento,required this.idDespacho});
 
   @override
   State<DocumentoDetalleScreen> createState() => _DocumentoDetalleScreenState();
@@ -18,8 +19,8 @@ class _DocumentoDetalleScreenState extends State<DocumentoDetalleScreen> {
   Widget build(BuildContext context) {
     
     List<Widget> screens = [
-      DevolucionCompletaScreen(documento: widget.documento),
-      Text("Entrega parcial"),
+      DevolucionCompletaScreen(documento: widget.documento,idDespacho: widget.idDespacho),
+      Center(child: Text("Entrega parcial")),
     ];
 
     return Scaffold(

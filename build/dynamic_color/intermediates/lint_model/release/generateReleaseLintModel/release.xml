@@ -1,0 +1,31 @@
+<variant
+    name="release"
+    package="io.material.plugins.dynamic_color"
+    minSdkVersion="16"
+    targetSdkVersion="16"
+    mergedManifest="C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml"
+    manifestMergeReport="C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color\outputs\logs\manifest-merger-release-report.txt"
+    proguardFiles="C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color\intermediates\default_proguard_files\global\proguard-android.txt-8.7.0"
+    partialResultsDir="C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color\intermediates\lint_partial_results\release\lintAnalyzeRelease\out">
+  <buildFeatures
+      namespacing="REQUIRED"/>
+  <sourceProviders>
+    <sourceProvider
+        manifests="src\main\AndroidManifest.xml"
+        javaDirectories="src\main\java;src\main\kotlin;src\release\java;src\release\kotlin"
+        resDirectories="src\main\res;src\release\res"
+        assetsDirectories="src\main\assets;src\release\assets"/>
+  </sourceProviders>
+  <testSourceProviders>
+  </testSourceProviders>
+  <testFixturesSourceProviders>
+  </testFixturesSourceProviders>
+  <artifact
+      classOutputs="C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color\intermediates\javac\release\compileReleaseJavaWithJavac\classes;C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color\tmp\kotlin-classes\release;C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color\intermediates\compile_r_class_jar\release\generateReleaseRFile\R.jar"
+      type="MAIN"
+      applicationId="io.material.plugins.dynamic_color"
+      generatedSourceFolders="C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color\generated\ap_generated_sources\release\out"
+      generatedResourceFolders="C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\dynamic_color\generated\res\resValues\release"
+      desugaredMethodsFiles="C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\6c1333b3bb4c3a4d7169ceed1a2405ce\transformed\D8BackportedDesugaredMethods.txt">
+  </artifact>
+</variant>

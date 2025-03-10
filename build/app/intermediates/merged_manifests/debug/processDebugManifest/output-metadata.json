@@ -4,7 +4,7 @@
     "type": "MERGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.example.disal_entregas",
+  "applicationId": "com.grupopelon.disal_entregas",
   "variantName": "debug",
   "elements": [
     {

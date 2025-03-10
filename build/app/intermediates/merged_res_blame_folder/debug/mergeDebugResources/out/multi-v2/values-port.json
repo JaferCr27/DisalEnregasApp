@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.disal_entregas.app-mergeDebugResources-48:/values-port/values-port.xml",
+            "outputFile": "com.grupopelon.disal_entregas.app-mergeDebugResources-49:/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\jbarrera\\.gradle\\caches\\8.10.2\\transforms\\5f3e4f018e4d28926a4074739ff3581b\\transformed\\appcompat-1.5.0\\res\\values-port\\values-port.xml",
+                    "source": "C:\\Users\\jbarrera\\.gradle\\caches\\8.10.2\\transforms\\67e431d42222568371fff0afd22bbdc6\\transformed\\appcompat-1.6.1\\res\\values-port\\values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -1,0 +1,227 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.grupopelon.disal_entregas"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="35" />
+10
+11    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+11-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:2:5-78
+11-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:2:22-76
+12    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+12-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:3:5-80
+12-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:3:22-78
+13    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+13-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:4:5-84
+13-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:4:22-82
+14    <!--
+15         Required to query activities that can process text, see:
+16         https://developer.android.com/training/package-visibility and
+17         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+18
+19         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
+20    -->
+21    <queries>
+21-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:42:5-47:15
+22        <intent>
+22-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:43:9-46:18
+23            <action android:name="android.intent.action.PROCESS_TEXT" />
+23-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:44:13-72
+23-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:44:21-70
+24
+25            <data android:mimeType="text/plain" />
+25-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:45:13-50
+25-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:45:19-48
+26        </intent>
+27    </queries>
+28
+29    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+29-->[:connectivity_plus] C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\connectivity_plus\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml:7:5-79
+29-->[:connectivity_plus] C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\connectivity_plus\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml:7:22-76
+30
+31    <permission
+31-->[androidx.core:core:1.13.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+32        android:name="com.grupopelon.disal_entregas.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+32-->[androidx.core:core:1.13.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+33        android:protectionLevel="signature" />
+33-->[androidx.core:core:1.13.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+34
+35    <uses-permission android:name="com.grupopelon.disal_entregas.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+35-->[androidx.core:core:1.13.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+35-->[androidx.core:core:1.13.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+36
+37    <application
+38        android:name="android.app.Application"
+38-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:7:9-42
+39        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+39-->[androidx.core:core:1.13.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+40        android:extractNativeLibs="true"
+41        android:icon="@mipmap/ic_launcher"
+41-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:8:9-43
+42        android:label="disal_entregas" >
+42-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:6:9-39
+43        <activity
+43-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:9:9-30:20
+44            android:name="com.grupopelon.disal_entregas.MainActivity"
+44-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:10:13-41
+45            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+45-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:15:13-163
+46            android:exported="true"
+46-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:11:13-36
+47            android:hardwareAccelerated="true"
+47-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:16:13-47
+48            android:launchMode="singleTop"
+48-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:12:13-43
+49            android:taskAffinity=""
+49-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:13:13-36
+50            android:theme="@style/LaunchTheme"
+50-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:14:13-47
+51            android:windowSoftInputMode="adjustResize" >
+51-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:17:13-55
+52
+53            <!--
+54                 Specifies an Android theme to apply to this Activity as soon as
+55                 the Android process has started. This theme is visible to the user
+56                 while the Flutter UI initializes. After that, this theme continues
+57                 to determine the Window background behind the Flutter UI.
+58            -->
+59            <meta-data
+59-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:22:13-25:17
+60                android:name="io.flutter.embedding.android.NormalTheme"
+60-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:23:15-70
+61                android:resource="@style/NormalTheme" />
+61-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:24:15-52
+62
+63            <intent-filter>
+63-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:26:13-29:29
+64                <action android:name="android.intent.action.MAIN" />
+64-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:27:17-68
+64-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:27:25-66
+65
+66                <category android:name="android.intent.category.LAUNCHER" />
+66-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:28:17-76
+66-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:28:27-74
+67            </intent-filter>
+68        </activity>
+69        <!--
+70             Don't delete the meta-data below.
+71             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+72        -->
+73        <meta-data
+73-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:33:9-35:33
+74            android:name="flutterEmbedding"
+74-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:34:13-44
+75            android:value="2" />
+75-->C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\android\app\src\main\AndroidManifest.xml:35:13-30
+76
+77        <service
+77-->[:geolocator_android] C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\geolocator_android\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml:8:9-12:56
+78            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+78-->[:geolocator_android] C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\geolocator_android\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml:9:13-77
+79            android:enabled="true"
+79-->[:geolocator_android] C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\geolocator_android\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml:10:13-35
+80            android:exported="false"
+80-->[:geolocator_android] C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\geolocator_android\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml:11:13-37
+81            android:foregroundServiceType="location" />
+81-->[:geolocator_android] C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\geolocator_android\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml:12:13-53
+82
+83        <activity
+83-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:9-22:45
+84            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+84-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:19-85
+85            android:exported="false"
+85-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:22:19-43
+86            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+86-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:21:19-78
+87
+88        <meta-data
+88-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\abeed4f47a72eff8f5b4e9bf7f2f3c91\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:21:9-23:69
+89            android:name="com.google.android.gms.version"
+89-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\abeed4f47a72eff8f5b4e9bf7f2f3c91\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:22:13-58
+90            android:value="@integer/google_play_services_version" />
+90-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\abeed4f47a72eff8f5b4e9bf7f2f3c91\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:23:13-66
+91
+92        <provider
+92-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\d221757f531c672c2df2db4ebaa2cbf1\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+93            android:name="androidx.startup.InitializationProvider"
+93-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\d221757f531c672c2df2db4ebaa2cbf1\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+94            android:authorities="com.grupopelon.disal_entregas.androidx-startup"
+94-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\d221757f531c672c2df2db4ebaa2cbf1\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+95            android:exported="false" >
+95-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\d221757f531c672c2df2db4ebaa2cbf1\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+96            <meta-data
+96-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\d221757f531c672c2df2db4ebaa2cbf1\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+97                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+97-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\d221757f531c672c2df2db4ebaa2cbf1\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+98                android:value="androidx.startup" />
+98-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\d221757f531c672c2df2db4ebaa2cbf1\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+99            <meta-data
+99-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\e80aa748ff6540407d8dba61c0d945fe\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+100                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+100-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\e80aa748ff6540407d8dba61c0d945fe\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+101                android:value="androidx.startup" />
+101-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\e80aa748ff6540407d8dba61c0d945fe\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+102            <meta-data
+102-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+103                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+103-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+104                android:value="androidx.startup" />
+104-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+105        </provider>
+106
+107        <uses-library
+107-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:23:9-25:40
+108            android:name="androidx.window.extensions"
+108-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:24:13-54
+109            android:required="false" />
+109-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:25:13-37
+110        <uses-library
+110-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:26:9-28:40
+111            android:name="androidx.window.sidecar"
+111-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:27:13-51
+112            android:required="false" />
+112-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:28:13-37
+113
+114        <receiver
+114-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+115            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+115-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+116            android:directBootAware="false"
+116-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+117            android:enabled="true"
+117-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+118            android:exported="true"
+118-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+119            android:permission="android.permission.DUMP" >
+119-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+120            <intent-filter>
+120-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+121                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+121-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+121-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+122            </intent-filter>
+123            <intent-filter>
+123-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+124                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+124-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+124-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+125            </intent-filter>
+126            <intent-filter>
+126-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+127                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+127-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+127-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+128            </intent-filter>
+129            <intent-filter>
+129-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+130                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+130-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+130-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5f7dcf6815bacc3ae7f099ba801348de\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+131            </intent-filter>
+132        </receiver>
+133    </application>
+134
+135</manifest>

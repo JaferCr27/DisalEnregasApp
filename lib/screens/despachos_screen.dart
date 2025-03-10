@@ -98,25 +98,19 @@ class _DespachosScreenState extends State<DespachosScreen> {
                                             fontWeight: FontWeight.bold
                                           ),
                                           ),
-                                          Chip(
-                                            avatar: CircleAvatar(
-                                              backgroundColor: despacho.rutaTerminada == 0 ? Colors.red : Colors.green,
-                                            ),
-                                            label: Text(despacho.estado),
-                                          )
+                                          // Chip(
+                                          //   avatar: CircleAvatar(
+                                          //     backgroundColor: despacho.rutaTerminada == 0 ? Colors.red : Colors.green,
+                                          //   ),
+                                          //   label: Text(despacho.estado),
+                                          // )
                                       ],
                                     ),
                                   ],
                                 ),
-                              subtitle: Text('Fecha: ${despacho.fechaEntrega}',),
+                              subtitle: Text('Fecha: ${despacho.fechaEntrega} \nClientes: ${despacho.cantidadDocs}',),
                               dense: true,
                           ),
-                          ListTile(
-                            subtitle: Text('Clientes: ${despacho.cantidadDocs}',),
-                            trailing: Icon(Icons.keyboard_double_arrow_right),
-                            dense: true,
-                            
-                          )
                       ],
                     ) ,
               ),
@@ -125,14 +119,33 @@ class _DespachosScreenState extends State<DespachosScreen> {
   }
   Widget _getBody() {
     return 
-      RefreshIndicator(
-        onRefresh: () => _getDespachos(),
-        child:
-          ListView.builder(
-            primary: false,
-            itemCount: _despachos.length,
-            itemBuilder: (context,index) => buildCard(_despachos[index]),
-          )
+      // RefreshIndicator(
+      //   onRefresh: () => _getDespachos(),
+      //   child:
+      //     ListView.builder(
+      //       primary: false,
+      //       itemCount: _despachos.length,
+      //       itemBuilder: (context,index) => buildCard(_despachos[index]),
+      //     )
+      // );
+
+
+      Column(
+        children: [
+          Expanded(
+            child:  
+              CustomScrollView(
+                slivers: [
+                  SliverList(delegate: SliverChildBuilderDelegate((context,index){
+                    return buildCard(_despachos[index]);
+                  },
+                  childCount: _despachos.length
+                  ),),
+                ],
+              )
+            )
+        ],
+
       );
   }
 }

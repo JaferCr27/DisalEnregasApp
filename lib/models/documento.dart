@@ -5,7 +5,7 @@ class Documento {
   String? documento;
   String? fechaDocumento;
   String? fechaEntrega;
-  String? cliente;
+  String cliente;
   double? totalDocumento;
   double? impuesto;
   double? descuento;
@@ -35,7 +35,7 @@ class Documento {
       this.documento,
       this.fechaDocumento,
       this.fechaEntrega,
-      this.cliente,
+      required this.cliente,
       this.totalDocumento,
       this.impuesto,
       this.descuento,
@@ -71,14 +71,16 @@ class Documento {
     String get estadoDesc {
       if (estado == "PEND") {
         return "Pendiente";
+      } else if (estado == "ENTC") {
+        return "Entrega completa";
       }
       return "";
     }
-    Icon get IconDoc {
+    Icon get iconDoc {
       if (tipoDocumento == "FACT") {
-        return const Icon(Icons.receipt_long, color: Color.fromRGBO(218, 86, 48, 1),);
+        return const Icon(Icons.receipt_long, color: Color.fromRGBO(52, 75, 115, 1) );
       }
-      return const Icon(Icons.inventory_2, color: Color.fromRGBO(52, 75, 115, 1),);
+      return const Icon(Icons.inventory_2, color: Color.fromRGBO(218, 86, 48, 1),);
     }
 
 

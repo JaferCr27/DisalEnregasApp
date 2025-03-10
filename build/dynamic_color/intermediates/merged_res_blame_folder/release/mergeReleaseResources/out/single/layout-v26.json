@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "io.material.plugins.dynamic_color-release-37:/layout-v26/abc_screen_toolbar.xml",
+        "source": "io.material.plugins.dynamic_color-appcompat-1.5.0-9:/layout-v26/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "io.material.plugins.dynamic_color-release-37:/layout-v26/mtrl_calendar_month.xml",
+        "source": "io.material.plugins.dynamic_color-material-1.7.0-17:/layout-v26/mtrl_calendar_month.xml"
+    }
+]

@@ -1,0 +1,10 @@
+keytool -genkey -v -keystore keys\key.jks `
+        -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 `
+        -alias sd
+        -storepass 123456
+
+alias: sd
+password: 123456
+
+
+keytool -genkeypair -v -keystore keys\key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias sd -storepass 123456 -keypass 123456 -dname "CN=Jafet Barrera, OU=Unidad desarrollo, O=Grupo pelon, L=Heredia, ST=Heredia, C=CR" -noprompt

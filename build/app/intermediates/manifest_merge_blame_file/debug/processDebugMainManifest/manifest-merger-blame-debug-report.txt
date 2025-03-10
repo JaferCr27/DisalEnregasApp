@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.disal_entregas"
+3    package="com.grupopelon.disal_entregas"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -51,12 +51,12 @@
 35
 36    <permission
 36-->[androidx.core:core:1.13.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
-37        android:name="com.example.disal_entregas.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+37        android:name="com.grupopelon.disal_entregas.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
 37-->[androidx.core:core:1.13.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
 38        android:protectionLevel="signature" />
 38-->[androidx.core:core:1.13.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
 39
-40    <uses-permission android:name="com.example.disal_entregas.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+40    <uses-permission android:name="com.grupopelon.disal_entregas.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 40-->[androidx.core:core:1.13.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
 40-->[androidx.core:core:1.13.1] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
 41
@@ -69,7 +69,7 @@
 47        android:icon="@mipmap/ic_launcher"
 48        android:label="disal_entregas" >
 49        <activity
-50            android:name="com.example.disal_entregas.MainActivity"
+50            android:name="com.grupopelon.disal_entregas.MainActivity"
 51            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 52            android:exported="true"
 53            android:hardwareAccelerated="true"
@@ -113,40 +113,40 @@
 87            android:foregroundServiceType="location" />
 87-->[:geolocator_android] C:\Users\jbarrera\Desktop\flutter\disal_entregas_app\build\geolocator_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:12:13-53
 88
-89        <uses-library
-89-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:23:9-25:40
-90            android:name="androidx.window.extensions"
-90-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:24:13-54
-91            android:required="false" />
-91-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:25:13-37
-92        <uses-library
-92-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:26:9-28:40
-93            android:name="androidx.window.sidecar"
-93-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:27:13-51
-94            android:required="false" />
-94-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:28:13-37
-95
-96        <activity
-96-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:9-22:45
-97            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-97-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:19-85
-98            android:exported="false"
-98-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:22:19-43
-99            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-99-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:21:19-78
-100
-101        <meta-data
-101-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\abeed4f47a72eff8f5b4e9bf7f2f3c91\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:21:9-23:69
-102            android:name="com.google.android.gms.version"
-102-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\abeed4f47a72eff8f5b4e9bf7f2f3c91\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:22:13-58
-103            android:value="@integer/google_play_services_version" />
-103-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\abeed4f47a72eff8f5b4e9bf7f2f3c91\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:23:13-66
+89        <activity
+89-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:9-22:45
+90            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+90-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:19-85
+91            android:exported="false"
+91-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:22:19-43
+92            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+92-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\9db9b81a577112600e8d2ee7b5450923\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:21:19-78
+93
+94        <meta-data
+94-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\abeed4f47a72eff8f5b4e9bf7f2f3c91\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:21:9-23:69
+95            android:name="com.google.android.gms.version"
+95-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\abeed4f47a72eff8f5b4e9bf7f2f3c91\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:22:13-58
+96            android:value="@integer/google_play_services_version" />
+96-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\abeed4f47a72eff8f5b4e9bf7f2f3c91\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:23:13-66
+97
+98        <uses-library
+98-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:23:9-25:40
+99            android:name="androidx.window.extensions"
+99-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:24:13-54
+100            android:required="false" />
+100-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:25:13-37
+101        <uses-library
+101-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:26:9-28:40
+102            android:name="androidx.window.sidecar"
+102-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:27:13-51
+103            android:required="false" />
+103-->[androidx.window:window:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\5093ab42d2307deb2d7ac0b7f5718c38\transformed\jetified-window-1.2.0\AndroidManifest.xml:28:13-37
 104
 105        <provider
 105-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\d221757f531c672c2df2db4ebaa2cbf1\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
 106            android:name="androidx.startup.InitializationProvider"
 106-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\d221757f531c672c2df2db4ebaa2cbf1\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
-107            android:authorities="com.example.disal_entregas.androidx-startup"
+107            android:authorities="com.grupopelon.disal_entregas.androidx-startup"
 107-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\d221757f531c672c2df2db4ebaa2cbf1\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
 108            android:exported="false" >
 108-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jbarrera\.gradle\caches\8.10.2\transforms\d221757f531c672c2df2db4ebaa2cbf1\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37

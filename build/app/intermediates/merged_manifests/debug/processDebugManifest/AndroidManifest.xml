@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.disal_entregas"
+    package="com.grupopelon.disal_entregas"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -34,10 +34,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <permission
-        android:name="com.example.disal_entregas.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.grupopelon.disal_entregas.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.example.disal_entregas.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="com.grupopelon.disal_entregas.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:name="android.app.Application"
@@ -47,7 +47,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="disal_entregas" >
         <activity
-            android:name="com.example.disal_entregas.MainActivity"
+            android:name="com.grupopelon.disal_entregas.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="true"
@@ -86,13 +86,6 @@
             android:exported="false"
             android:foregroundServiceType="location" />
 
-        <uses-library
-            android:name="androidx.window.extensions"
-            android:required="false" />
-        <uses-library
-            android:name="androidx.window.sidecar"
-            android:required="false" />
-
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
             android:exported="false"
@@ -102,9 +95,16 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <uses-library
+            android:name="androidx.window.extensions"
+            android:required="false" />
+        <uses-library
+            android:name="androidx.window.sidecar"
+            android:required="false" />
+
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.example.disal_entregas.androidx-startup"
+            android:authorities="com.grupopelon.disal_entregas.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"

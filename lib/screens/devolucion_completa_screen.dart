@@ -1,14 +1,19 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:disal_entregas/components/loader_component.dart';
+import 'package:disal_entregas/helpers/app_helper.dart';
+import 'package:disal_entregas/helpers/location_helper.dart';
 import 'package:disal_entregas/models/documento.dart';
 import 'package:disal_entregas/models/documento_linea.dart';
+import 'package:disal_entregas/screens/documentos_screen.dart';
 import 'package:disal_entregas/services/data_services.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 class DevolucionCompletaScreen extends StatefulWidget {
   final Documento documento;
-  const DevolucionCompletaScreen({super.key, required this.documento});
+  final int idDespacho;
+  const DevolucionCompletaScreen({super.key, required this.documento,required this.idDespacho});
 
   @override
   State<DevolucionCompletaScreen> createState() => _DevolucionCompletaScreenState();
@@ -19,9 +24,11 @@ class _DevolucionCompletaScreenState extends State<DevolucionCompletaScreen> {
   bool _showLoader = false;
   List<DocumentoLinea> _lineas = [];
   List<DocumentoLinea> _lineasFiltro = [];
+  bool _esFactura = false;
   @override
   void initState() {
     super.initState();
+    _esFactura = widget.documento.tipoDocumento == 'FACT'? true: false;
     _getDocumentoLinea();
   }
   @override
@@ -32,12 +39,12 @@ class _DevolucionCompletaScreenState extends State<DevolucionCompletaScreen> {
         actions: [
           IconButton(
             padding: EdgeInsets.all(1),
-            onPressed: ()=> _entregaCompleta(), 
-            icon: Icon(Icons.verified, color: Colors.green[900],)
+            onPressed: ()=> _entregaDocumento(_esFactura ? 'ENTC': 'RECO'), 
+            icon: Icon(Icons.check_circle, color: Colors.green[900],)
           ),
           IconButton(
             padding: EdgeInsets.all(1),
-              onPressed: ()=> _entregaNula(), 
+              onPressed: ()=> _entregaDocumento(_esFactura ? 'ENTN': 'NREC'), 
               icon: Icon(Icons.cancel, color: Colors.red[900],)
             ),
             IconButton(
@@ -89,9 +96,9 @@ class _DevolucionCompletaScreenState extends State<DevolucionCompletaScreen> {
       Column(
         children: [
           Container(
-            margin: EdgeInsets.all(4.0),
+            margin: EdgeInsets.all(2.0),
             child: Column(
-              spacing: 2,
+              spacing: 1,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -176,6 +183,42 @@ class _DevolucionCompletaScreenState extends State<DevolucionCompletaScreen> {
     _lineasFiltro = _lineas;
     setState(() => _showLoader = false);
   }
+  Future <void> _entregaDocumento(String accion) async {
+    String entrega = accion == 'ENTC' ? 'Entrega total': 'Entrega nula' ;
+    var response =  await showAlertDialog(
+                context: context,
+                title: _esFactura ? entrega : 'Cambios Vendedor', 
+                message: _esFactura ?'¿Está seguro de marcar el documento como $entrega?' : 'Marcar como recolectado?',
+                actions: <AlertDialogAction>[
+                    AlertDialogAction(key: 'no', label: 'Cancelar'),
+                    AlertDialogAction(key: 'yes', label: 'Aceptar'),
+                ]);    
+    if (response == 'no') {return; }
+    var update = await _dbHelper.actualizarDocumento(widget.documento.idDocumento, _esFactura ? 'ENTC': 'RECO',0);
+    if (update.isSuccess) {
+      setState(() => (_showLoader = true) );
+      Position? position = await LocationHelper.getCurrentLocation();
+      setState(() => (_showLoader = false));
+      if (position != null) {
+        await AppHelper.insertarRegistroEvento(_esFactura ? 'ENTC': 'RECO', 
+                                                            position.longitude,position.latitude, 
+                                                            0,widget.documento.cliente,widget.documento.idDocumento, 0,'0',0); 
+      }
+      Navigator.push(
+        context, 
+        MaterialPageRoute(
+          builder: (context) => DocumentosScreen(cliente: widget.documento.cliente, idDespacho:  widget.idDespacho)
+        )
+        );
+      return AppHelper.alerta(_esFactura ? 'Entrega completa' : 'Cambios Vendedor', update.message, context);
+      
+      
+      
+    }else{
+      return AppHelper.alerta('Error', update.message, context);
+    }
+
+  }
   void filterSearch(String value) {
       List<DocumentoLinea> results = []; 
       if (value.isEmpty) {
@@ -191,29 +234,6 @@ class _DevolucionCompletaScreenState extends State<DevolucionCompletaScreen> {
         _lineasFiltro = results;
       });
     }
-    
-  void _entregaCompleta() async {
-    var response =  await showAlertDialog(
-                context: context,
-                title: 'Entrega completa', 
-                message: '¿Está seguro de marcar el documento como entrega completa?',
-                actions: <AlertDialogAction>[
-                    AlertDialogAction(key: 'no', label: 'Cancelar'),
-                    AlertDialogAction(key: 'yes', label: 'Aceptar'),
-                ]);    
-              return;
-  }
-  void _entregaNula() async {
-    var response =  await showAlertDialog(
-                context: context,
-                title: 'Entrega nula', 
-                message: '¿Está seguro de marcar el documento como entrega nula?',
-                actions: <AlertDialogAction>[
-                    AlertDialogAction(key: 'no', label: 'Cancelar'),
-                    AlertDialogAction(key: 'yes', label: 'Aceptar'),
-                ]);    
-              return;
-  }
   void _imprimirFact() async {
      var response =  await showAlertDialog(
                 context: context,

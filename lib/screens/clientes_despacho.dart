@@ -32,6 +32,13 @@ class _ClientesDespachoState extends State<ClientesDespacho> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.despacho.consecutivo),
+        actions: [
+           IconButton(
+            padding: EdgeInsets.all(1),
+            onPressed: ()=> _getClientes(), 
+            icon: Icon(Icons.sync)
+          ),
+        ],
       ),
       body: 
         Padding(

@@ -1,6 +1,9 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:disal_entregas/components/loader_component.dart';
-import 'package:disal_entregas/helpers/locationHelper.dart';
+import 'package:disal_entregas/helpers/app_helper.dart';
+import 'package:disal_entregas/helpers/location_helper.dart';
 import 'package:disal_entregas/models/documento.dart';
+import 'package:disal_entregas/screens/cobro_screen.dart';
 import 'package:disal_entregas/screens/documento_detalle_screen.dart';
 import 'package:disal_entregas/services/data_services.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +14,6 @@ class DocumentosScreen extends StatefulWidget {
   final String cliente;
   final int idDespacho;
   const DocumentosScreen({super.key, required this.cliente, required this.idDespacho});
-
   @override
   State<DocumentosScreen> createState() => _DocumentosScreenState();
 }
@@ -19,10 +21,12 @@ class DocumentosScreen extends StatefulWidget {
 class _DocumentosScreenState extends State<DocumentosScreen> {
   final _dbHelper = DataServices();
   bool _showLoader = false;
+  bool _tieneInicio = false;
+  bool _tieneFin = false;
+  bool _btnFin = false;
+  bool _btnInicio = true;
   List<Documento> _documentos = [];
   List<Documento> _documentosFiltro = [];
-
-
   @override
   void initState() {
     super.initState();
@@ -33,22 +37,35 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Cliente: ${widget.cliente}"),
+         actions: [
+           IconButton(
+            padding: EdgeInsets.all(8.0),
+            onPressed: ()=> _getDocumentos(), 
+            icon: Icon(Icons.sync)
+          ),
+          IconButton(
+            padding: EdgeInsets.all(8.0),
+            onPressed: (){
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (context) => CobroScreen(
+                    cliente : widget.cliente,
+                    idDespacho: widget.idDespacho,
+                    )
+                  )
+                );
+            }, 
+            icon: Icon(Icons.paid, color: Colors.green[900],)
+          ),
+        ],
       ),
-      body: Center(
-        child: 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _showLoader ? LoaderComponent(text: '...Cargando...'): getContent(),
-        )
-      ),
+      body: 
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          child: _showLoader ? LoaderComponent(text: '...Cargando...'): getContent(),
+          ),
     );
-  }
-  
-  Future<void> _getDocumentos() async {
-    setState(() => _showLoader = true);
-    _documentos = await _dbHelper.getDocumentosClienteDespacho(widget.cliente, widget.idDespacho);
-    _documentosFiltro = _documentos;
-    setState(() => _showLoader = false);
   }
   Widget getContent() {
     return _documentos.isEmpty
@@ -79,7 +96,7 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
                 )
                 
               ),
-              onChanged: (value) => filterSearch(value),
+              onChanged: (value) => _filterSearch(value),
             ),
             const SizedBox(height: 20,),
             Expanded(
@@ -93,27 +110,56 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
               margin: EdgeInsets.all(10),
               width: double.infinity,
               child: 
-                ElevatedButton(
-                  onPressed: () =>(){
-                    _iniciarVisita();
-                  }, 
-                  style: ElevatedButton.styleFrom(
-                    shape: const StadiumBorder(),
-                    elevation: 20,
-                    minimumSize: Size.fromHeight(60),
-                    shadowColor: Theme.of(context).primaryColor,
-                    backgroundColor: Color.fromRGBO(52, 75, 115, 1)
-                  ),
-                  child:  
-                    Text(
-                      "Iniciar visita",
-                      style:
-                      TextStyle (
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
-                      ),   
+                Column(
+                  children: [
+                    Visibility(
+                      visible: _btnInicio,
+                      child: ElevatedButton(
+                        onPressed: ()=> _iniciarVisita(), 
+                        style: ElevatedButton.styleFrom(
+                          shape: const StadiumBorder(),
+                          elevation: 20,
+                          minimumSize: Size.fromHeight(60),
+                          shadowColor: Theme.of(context).primaryColor,
+                          backgroundColor: Color.fromRGBO(52, 75, 115, 1)
+                        ),
+                        child:  
+                          Text(
+                            "Iniciar visita",
+                            style:
+                            TextStyle (
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
+                            ),   
+                          ),
+                      ),
                     ),
+                    Visibility(
+                      visible: _btnFin,
+                      child: ElevatedButton(
+                        onPressed: ()=> _finVisita()
+                        , 
+                        style: ElevatedButton.styleFrom(
+                          shape: const StadiumBorder(),
+                          elevation: 20,
+                          minimumSize: Size.fromHeight(60),
+                          shadowColor: Theme.of(context).primaryColor,
+                          backgroundColor: Color.fromRGBO(218, 86, 48, 1)
+                        ),
+                        child:  
+                          Text(
+                            "Finalizar visita",
+                            style:
+                            TextStyle (
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
+                            ),   
+                          ),
+                      ),
+                    )
+                  ],
                 ),
+                
               )
           ],
           
@@ -130,7 +176,8 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
                 context, 
                 MaterialPageRoute(
                   builder: (context) => DocumentoDetalleScreen(
-                    documento : documento
+                    documento : documento,
+                    idDespacho: widget.idDespacho,
                     )
                   )
                 );
@@ -141,41 +188,18 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ListTile(
-                    leading: documento.IconDoc ,
+                    leading: documento.iconDoc ,
                     title: Text('${documento.documento} - ${documento.tipoDocDesc}',style: TextStyle( fontWeight: FontWeight.bold),),
-                    subtitle: Text('Monto: ${NumberFormat.currency(symbol: '₡').format(documento.totalDocumento)}'),
+                    subtitle: Text('Monto: ${NumberFormat.currency(symbol: '₡').format(documento.totalDocumento)} \nEstado: ${documento.estadoDesc}'),
                     trailing: Icon(Icons.keyboard_double_arrow_right, color: Color.fromRGBO(52, 75, 115, 1)),
-                    //isThreeLine: true,
-                    //dense: true,
+                    dense: true,
                   ),
-                  // Row(
-                  //   children: [
-                  //     SizedBox(width: 55,),
-                  //     Text('Fecha Entrega: ${documento.fechaEntrega}'),
-                  //   ],
-                  // ),
-                  // Row(
-                  //   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     SizedBox(width: 55,),
-                  //     Text('Estado: ${documento.estadoDesc}'),
-                  //     Text(" - "),
-                  //     Text('Ruta: ${documento.ruta}',)
-                  //   ],
-                  // ),
-                  // Row(
-                  // children: [
-                  //   SizedBox(width: 55,),
-                  //   Text('Marchamo: ${documento.marchamo}')
-                  // ],
-                  // )
-                  //Text(client.horaLlegada.toString(),style: TextStyle( color: Colors.deepOrange, fontWeight: FontWeight.bold)),
                 ],
               ),
           ),
       );
   }
-  void filterSearch(String value) {
+  void _filterSearch(String value) {
       List<Documento> results = []; 
       if (value.isEmpty) {
         results = _documentos;
@@ -188,15 +212,71 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
         _documentosFiltro = results;
       });
     }
-    
-   void _iniciarVisita() async {
-
-    Position? position = await LocationHelper.getCurrentLocation();
-    if (position != null) {
-        print ("Latitud: ${position.latitude}, Longitud: ${position.longitude}");
-
-    } else {
-        print("No se pudo obtener la ubicación.");
+  Future<void> _iniciarVisita() async {
+    _consultaInicioFin('INVI');
+  }
+  Future<void> _finVisita() async{
+    List<Documento> documentos = await _dbHelper.getDocumentosClienteDespacho(widget.cliente, widget.idDespacho);
+    bool tienePediente = documentos.where((e)=>e.estado == 'PEND').isNotEmpty;
+    if (tienePediente) {
+      return showAlertDialog(
+        context: context,
+        title: 'Fin de visita', 
+        message: 'Para finalizar Visita primero debe entregar todos los documentos',
+        actions: <AlertDialogAction>[
+                    AlertDialogAction(label: 'Aceptar', key: null),
+                  ]);  
     }
+    _consultaInicioFin('FNVI');
+  }
+  Future<void> _consultaInicioFin (String accion) async {
+    String evento = accion == 'INVI' ? 'Iniciar Visita':  'Finalizar visita';
+    var response = await showAlertDialog(
+                    context: context,
+                    title: evento, 
+                    message: '¿Está seguro que quiere $evento?',
+                    actions: <AlertDialogAction>[
+                                AlertDialogAction(key: 'no', label: 'Cancelar'),
+                                AlertDialogAction(key: 'yes', label: 'Aceptar'),
+                              ]);
+    if (response == 'no') {
+      return;
+    }    
+    setState(() => (_showLoader = true) );
+    Position? position = await LocationHelper.getCurrentLocation();
+    setState(() => (_showLoader = false) );
+    if (position != null) {
+      var result = await AppHelper.insertarRegistroEvento(accion, 
+                                      position.longitude, 
+                                      position.latitude, 
+                                      0, 
+                                      widget.cliente, 
+                                      0, 
+                                      widget.idDespacho, 
+                                      '0',0
+                                      );
+      _getDocumentos();
+      return AppHelper.alerta(evento,result.message,context);
+    } else {
+       return AppHelper.alerta('Error','No se pudo obtener la ubicación',context);
+    }
+  }
+  Future<void> _getDocumentos() async {
+    setState(() => _showLoader = true);
+    _documentos = await _dbHelper.getDocumentosClienteDespacho(widget.cliente, widget.idDespacho);
+    _tieneInicio = await _dbHelper.getInicioFin(widget.cliente, widget.idDespacho, 'INVI');
+    _tieneFin = await _dbHelper.getInicioFin(widget.cliente, widget.idDespacho,'FNVI');
+    // ya termino
+    if (_tieneFin) {
+      _btnInicio = false;      
+      _btnFin = false;      
+    } // solo tiene inicio
+    else if (_tieneInicio && !_tieneFin) {
+      _btnInicio = false;      
+      _btnFin = true;      
+    }
+    
+    _documentosFiltro = _documentos;
+    setState(() => _showLoader = false);
   }
 }
